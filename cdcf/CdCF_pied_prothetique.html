@@ -1,0 +1,106 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+body{margin:0;padding:28px;color:#1f2937;background:#fff;font:15px/1.65 system-ui,sans-serif}h1{font-size:1.65rem;line-height:1.25;color:#4F1240;margin:0 0 10px}h2{font-size:1.25rem;color:#4F1240;margin:30px 0 10px}p{margin:0 0 14px;white-space:pre-wrap}.table-wrap{overflow-x:auto;margin:20px 0 28px}table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}th,td{padding:10px 12px;border:1px solid #d1d5db;text-align:left;vertical-align:top}th{background:#4F1240;color:#fff;font-weight:650}tr:nth-child(even) td{background:#f8fafc}@media(max-width:640px){body{padding:18px}table{font-size:12px}th,td{padding:8px}}</style></head><body>
+<h1>Cahier des Charges Fonctionnel — Pied proth&#233;tique monobloc</h1>
+<p>Projet ENSAM — Pied proth&#233;tique pour enfant de 8 ans, fabrication additive</p>
+<div class="table-wrap"><table><tbody>
+<tr>
+<th><p>Fonction</p></th>
+<th><p>&#201;nonc&#233; de la fonction</p></th>
+<th><p>Crit&#232;re d&#39;appr&#233;ciation</p></th>
+<th><p>Niveau d&#39;exigence</p></th>
+<th><p>Intervalle de tol&#233;rance</p></th>
+<th><p>Flexibilit&#233;</p></th>
+</tr>
+<tr>
+<td><p>FP</p></td>
+<td><p>Permettre le d&#233;placement quotidien de l&#39;enfant tout en assurant sa stabilit&#233; et en supportant son poids de mani&#232;re r&#233;p&#233;t&#233;e.</p></td>
+<td><p>Poids</p><p>&#201;nergie d&#39;impact</p><p>Raideur K</p></td>
+<td><p>4x27kg = 108 kg ⇒ 1100 N</p><p>270 N</p><p>K = ???</p></td>
+<td><p>&#177; 200 N</p><p>&#177; 50 N</p></td>
+<td><p>F0</p></td>
+</tr>
+<tr>
+<td><p>FC1</p></td>
+<td><p>R&#233;sister &#224; l&#39;environnement ext&#233;rieur (eau, sable, etc.)</p></td>
+<td><p>Indice de protection (IP)</p></td>
+<td><p>IP55</p></td>
+<td><p>N/A</p></td>
+<td><p>F1</p></td>
+</tr>
+<tr>
+<td><p>FC2</p></td>
+<td><p>Permettre l&#39;assemblage du pied et du &#171; c&#244;ne &#187; de fixation sur le membre amput&#233;</p></td>
+<td><p>Encombrement de l&#39;attache</p></td>
+<td><p>M5 sur carr&#233; d&#39;entraxe 30 mm</p></td>
+<td><p>&#177; 0,1 mm</p></td>
+<td><p>F1</p></td>
+</tr>
+<tr>
+<td><p>FC3</p></td>
+<td><p>Pi&#232;ce monobloc</p></td>
+<td><p>Nombre de pi&#232;ces</p></td>
+<td><p>1</p></td>
+<td><p>N/A</p></td>
+<td><p>F0</p></td>
+</tr>
+<tr>
+<td><p>FC4</p></td>
+<td><p>Assurer l&#39;amortissement lors de la pose du pied (proth&#233;tique)</p></td>
+<td><p>Raideur K</p></td>
+<td><p>K = ???</p></td>
+<td></td>
+<td><p>F0</p></td>
+</tr>
+<tr>
+<td><p>FC5</p></td>
+<td><p>Pi&#232;ce obtenue en fabrication additive</p></td>
+<td><p>Outil de fabrication</p></td>
+<td><p>Imprimante 3D</p></td>
+<td><p>Usage de supports</p></td>
+<td><p>F1</p></td>
+</tr>
+<tr>
+<td><p>FC6</p></td>
+<td><p>&#202;tre &#224; la pointure de l&#39;utilisateur &#224; une hauteur raisonnable</p></td>
+<td><p>Pointure de chaussure</p><p>Hauteur</p></td>
+<td><p>Taille pointure 35</p><p>&#189; &#215; pointure ⇒ 22,4 cm / 11,2 cm</p></td>
+<td><p>&#177; 4 mm</p><p>&#177; 4 mm</p></td>
+<td><p>F1</p></td>
+</tr>
+<tr>
+<td><p>FC7</p></td>
+<td><p>Usage quotidien</p></td>
+<td><p>Dur&#233;e de vie du pied</p></td>
+<td><p>6 mois</p></td>
+<td><p>≥ 6 mois</p></td>
+<td><p>F1</p></td>
+</tr>
+<tr>
+<td><p>FC8</p></td>
+<td><p>Esth&#233;tique pour un enfant de 8 ans</p></td>
+<td><p>&#201;chelle de Likert</p></td>
+<td><p>Qualifi&#233; d&#39;acceptable au minimum par l&#39;utilisateur</p></td>
+<td><p>Moche – pas terrible – correct – beau – trop beau (adapt&#233; &#224; l&#39;&#226;ge de l&#39;utilisateur)</p></td>
+<td><p>F2</p></td>
+</tr>
+</tbody></table></div>
+<h2>Explication des fonctions</h2>
+<p>FP — Fonction principale — Permettre le d&#233;placement quotidien de l&#39;enfant</p>
+<p>C&#39;est la fonction de service centrale du pied proth&#233;tique : elle doit assurer le port du poids du corps et la stabilit&#233; &#224; chaque pas, de mani&#232;re r&#233;p&#233;t&#233;e sur toute la dur&#233;e d&#39;usage. Le poids de r&#233;f&#233;rence (108 kg, soit 1100 N) int&#232;gre un facteur dynamique li&#233; aux impacts de la marche et de la course, avec une marge de s&#233;curit&#233; (enfant de 27 kg r&#233;el). La raideur K, encore &#224; d&#233;terminer, conditionne directement le confort, la restitution d&#39;&#233;nergie et la s&#233;curit&#233; du dispositif : elle sera fix&#233;e par calcul (fl&#232;che admissible, &#233;nergie de flexion vis&#233;e) puis valid&#233;e exp&#233;rimentalement sur prototype. Cette fonction est class&#233;e F0 (rigide) car elle touche &#224; la s&#233;curit&#233; de l&#39;utilisateur : aucune flexibilit&#233; n&#39;est tol&#233;r&#233;e sur la tenue en charge.</p>
+<p>FC1 — R&#233;sister &#224; l&#39;environnement ext&#233;rieur</p>
+<p>Le pied doit conserver ses performances m&#233;caniques et son int&#233;grit&#233; face aux conditions d&#39;usage ext&#233;rieur typiques d&#39;un enfant (flaques, sable, &#233;claboussures, pluie). L&#39;indice IP55 garantit une protection contre les poussi&#232;res et les jets d&#39;eau, ce qui couvre largement les usages courants sans sur-dimensionner vers un niveau marin. Cette fonction est class&#233;e F1 (flexibilit&#233; faible) : le niveau peut l&#233;g&#232;rement varier selon les contraintes de conception (mat&#233;riaux disponibles, proc&#233;d&#233; d&#39;impression) sans remettre en cause la fonction elle-m&#234;me.</p>
+<p>FC2 — Permettre l&#39;assemblage du pied et du &#171; c&#244;ne &#187; de fixation</p>
+<p>Cette fonction de contact assure l&#39;interface m&#233;canique entre le pied proth&#233;tique et le moignon (via le c&#244;ne de fixation). La solution retenue — un filetage M5 sur un carr&#233; d&#39;entraxe 30 mm — doit garantir un assemblage fiable, d&#233;montable si besoin, et compatible avec les standards de fixation proth&#233;tique courants. La tol&#233;rance de &#177; 0,1 mm refl&#232;te une exigence d&#39;usinage/impression precise pour assurer l&#39;interchangeabilit&#233; et &#233;viter tout jeu m&#233;canique nuisible. Class&#233;e F1, cette fonction laisse une marge d&#39;ajustement sur les cotes tant que l&#39;assemblage reste fonctionnel.</p>
+<p>FC3 — Pi&#232;ce monobloc</p>
+<p>Le pied doit &#234;tre con&#231;u comme une seule pi&#232;ce, sans assemblage de composants multiples. Cette contrainte simplifie la fabrication (un seul cycle d&#39;impression), r&#233;duit les risques de d&#233;faillance aux interfaces (pas de vis, colle ou liaison m&#233;canique suppl&#233;mentaire &#224; surveiller) et s&#39;inscrit dans la logique de fabrication additive du projet. Class&#233;e F0 (rigide), car il s&#39;agit d&#39;une exigence de conception structurante qui conditionne l&#39;ensemble de l&#39;architecture de la pi&#232;ce.</p>
+<p>FC4 — Assurer l&#39;amortissement lors de la pose du pied</p>
+<p>L&#39;amortissement au contact talon est obtenu par la flexion &#233;lastique de la pi&#232;ce elle-m&#234;me (pas d&#39;&#233;l&#233;ment amortisseur d&#233;di&#233;, coh&#233;rent avec l&#39;exigence de pi&#232;ce monobloc de FC3). Cette fonction est donc directement pilot&#233;e par la raideur K d&#233;finie en FP : il ne s&#39;agit pas d&#39;un param&#232;tre de conception ind&#233;pendant, mais d&#39;une cons&#233;quence m&#233;canique du m&#234;me choix de raideur. C&#39;est pourquoi FC4 est class&#233;e F0 : on ne peut pas ajuster l&#39;amortissement sans modifier K, donc sans impacter &#233;galement la fonction principale.</p>
+<p>FC5 — Pi&#232;ce obtenue en fabrication additive</p>
+<p>Le pied sera fabriqu&#233; par impression 3D, ce qui impose des contraintes g&#233;om&#233;triques sp&#233;cifiques (angles de surplomb, &#233;paisseurs minimales, orientation d&#39;impression). Compte tenu de la complexit&#233; probable de la forme (type structure pieuvre), l&#39;usage de supports d&#39;impression est anticip&#233; et accept&#233; comme param&#232;tre de fabrication, plut&#244;t que d&#39;imposer une conception sans aucun support. Class&#233;e F1, cette fonction laisse de la flexibilit&#233; sur la strat&#233;gie d&#39;impression (avec ou sans supports, orientation) tant que la pi&#232;ce finale reste conforme aux autres exigences.</p>
+<p>FC6 — &#202;tre &#224; la pointure de l&#39;utilisateur &#224; une hauteur raisonnable</p>
+<p>Le pied doit s&#39;int&#233;grer dans une chaussure de pointure 35, avec un encombrement vertical compatible avec un chaussage normal. La hauteur cible (22,4 cm, ou 11,2 cm selon la zone consid&#233;r&#233;e) d&#233;coule directement de la pointure via un ratio proportionnel. Une tol&#233;rance de &#177; 4 mm permet d&#39;absorber les variations li&#233;es &#224; la conception interne (&#233;paisseur de mati&#232;re, d&#233;gagement du m&#233;canisme de flexion) sans compromettre le chaussage. Class&#233;e F1, cette fonction admet une marge d&#39;ajustement raisonnable.</p>
+<p>FC7 — Usage quotidien</p>
+<p>Le pied doit supporter un usage intensif quotidien pendant au moins 6 mois sans d&#233;gradation compromettant sa fonction. Sur la base d&#39;une hypoth&#232;se de 10 000 pas par jour (hypoth&#232;se volontairement conservatrice pour un enfant de 8 ans, dont l&#39;activit&#233; r&#233;elle peut &#234;tre sup&#233;rieure), cela repr&#233;sente environ 1,8 million de cycles de charge sur la p&#233;riode. Cette dur&#233;e guidera les essais de fatigue m&#233;canique du prototype. Class&#233;e F1, la dur&#233;e de vie est une exigence plancher (≥ 6 mois) qui peut &#234;tre d&#233;pass&#233;e sans que cela pose probl&#232;me.</p>
+<p>FC8 — Esth&#233;tique pour un enfant de 8 ans</p>
+<p>Au-del&#224; de la fonction technique, l&#39;acceptation psychologique et esth&#233;tique du dispositif par l&#39;enfant est un crit&#232;re de r&#233;ussite du projet. Elle est &#233;valu&#233;e via une &#233;chelle de Likert adapt&#233;e &#224; l&#39;&#226;ge de l&#39;utilisateur (moche – pas terrible – correct – beau – trop beau), avec un niveau minimal requis de &#171; correct &#187; (acceptable). Class&#233;e F2 (flexibilit&#233; &#233;lev&#233;e), cette fonction reste secondaire par rapport aux exigences m&#233;caniques et de s&#233;curit&#233;, et admet une large marge d&#39;interpr&#233;tation dans sa mise en œuvre (couleurs, formes, finitions).</p>
+</body></html>
