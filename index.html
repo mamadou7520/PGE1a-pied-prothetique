@@ -59,7 +59,7 @@
         class="bg-amViolet-800 text-white border-b border-amViolet-700 h-20 flex items-center justify-between px-6 shrink-0 z-20 shadow-md">
         <div class="flex items-center space-x-4">
             <!-- Logo Arts et Métiers agrandi -->
-            <img src="arts_et_metiers_new_en_logo_couleur_rvb.jpg" alt="Logo Arts et Métiers" class="h-16 w-auto object-contain rounded bg-white p-1 shadow-sm">
+            <img src="image/arts_et_metiers_new_en_logo_couleur_rvb.jpg" alt="Logo Arts et Métiers" class="h-16 w-auto object-contain rounded bg-white p-1 shadow-sm">
             <div class="h-9 w-2.5 bg-amOrange shrink-0" style="transform: skewX(-20deg)"></div>
             <div>
                 <h1 class="text-base font-semibold text-white tracking-wide">Projet pied prothétique PGE1A</h1>
@@ -868,6 +868,8 @@
             }
         }
 
+        const imagePath = path => path.startsWith('http') ? path : `image/${path}`;
+
         function renderGraphNodes() {
             const container = document.getElementById('patent-nodes-container');
             container.innerHTML = '';
@@ -908,12 +910,12 @@
                         <div onclick="selectPatent('${patent.id}')" class="cursor-pointer relative">
                             <div class="rounded-full bg-white overflow-hidden shadow-md transition-transform duration-150 group-hover:scale-110"
                                  style="width:${NODE}px;height:${NODE}px;border:3px solid ${isSelected ? '#7F2060' : RING[patent.category]};${isSelected ? 'box-shadow:0 0 0 4px rgba(127,32,96,.35);' : ''}">
-                                <img src="${patent.image}" alt="${patent.title}"
+                                <img src="${imagePath(patent.image)}" alt="${patent.title}"
                                      class="w-full h-full object-contain"
                                      onerror="this.src='${FALLBACK_IMG}'">
                             </div>
                             <div class="absolute left-1/2 -translate-x-1/2 ${popPos} hidden group-hover:block w-40 bg-white border border-slate-200 rounded-lg shadow-xl p-2 text-center pointer-events-none">
-                                <img src="${patent.image}" alt=""
+                                <img src="${imagePath(patent.image)}" alt=""
                                      class="w-full h-20 object-contain rounded bg-slate-100 mb-1"
                                      onerror="this.src='${FALLBACK_IMG}'">
                                 <div class="text-[11px] font-bold text-slate-800">${patent.title}</div>
@@ -951,7 +953,7 @@
             document.getElementById('detail-title').innerText = patent.title;
             document.getElementById('detail-subtitle').innerText = patent.subtitle;
             document.getElementById('detail-espacenet-link').href = patent.espacenetUrl;
-            document.getElementById('detail-main-image').src = patent.largeImage;
+            document.getElementById('detail-main-image').src = imagePath(patent.largeImage);
             document.getElementById('detail-meta-pos').innerText = `(${patent.x} ; ${patent.y})`;
             document.getElementById('detail-meta-complexity').innerText = patent.x;
             document.getElementById('detail-meta-adaptability').innerText = patent.y;
@@ -971,9 +973,9 @@
             thumbnailsContainer.innerHTML = '';
             patent.thumbnails.forEach((thumb) => {
                 const img = document.createElement('img');
-                img.src = thumb;
+                img.src = imagePath(thumb);
                 img.className = "w-12 h-9 object-cover rounded border border-amViolet-700 hover:border-amOrange cursor-pointer transition";
-                img.onclick = () => { document.getElementById('detail-main-image').src = patent.largeImage; };
+                img.onclick = () => { document.getElementById('detail-main-image').src = imagePath(patent.largeImage); };
                 thumbnailsContainer.appendChild(img);
             });
         }
@@ -1022,7 +1024,7 @@
                 };
                 item.innerHTML = `
                     <div class="flex items-center space-x-3">
-                        <img src="${patent.image}" class="w-12 h-9 object-cover rounded bg-white border border-slate-200" onerror="this.src='https://placehold.co/60x45/f1f5f9/475569?text=Img'">
+                        <img src="${imagePath(patent.image)}" class="w-12 h-9 object-cover rounded bg-white border border-slate-200" onerror="this.src='https://placehold.co/60x45/f1f5f9/475569?text=Img'">
                         <div>
                             <h4 class="text-sm font-bold text-slate-800">${patent.title}</h4>
                             <p class="text-xs text-slate-500">${patent.subtitle}</p>
