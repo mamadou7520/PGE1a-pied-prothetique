@@ -334,22 +334,33 @@
         </div>
 
         <!-- ================= VUE 3 : ETUDE 1 ================= -->
-        <div id="view-etude1" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto p-10 w-full h-full">
+        <div id="view-etude1" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto px-10 pt-4 pb-10 w-full h-full">
             <div class="max-w-6xl mx-auto w-full space-y-8">
                 <h2 class="text-3xl font-bold underline text-slate-900">Etude 1 hypothèse poutres</h2>
 
-                <p class="text-base leading-relaxed text-slate-700">
-                    Cette première étude vise à simplifier le comportement mécanique du pied prothétique en le modélisant
-                    comme une poutre, afin d'établir un premier dimensionnement analytique. Une poutre à section
-                    rectangulaire constante a été considérée. Les résultats mettent en évidence un compromis entre les
-                    critères de résistance et de rigidité : lorsque la section est dimensionnée pour respecter le critère
-                    de contrainte, la rigidité obtenue reste insuffisante, avec une flèche calculée de 23 mm. À l'inverse,
-                    lorsque le dimensionnement vise à respecter le critère de rigidité, les contraintes dépassent la
-                    limite admissible. Dans le cadre de ces hypothèses, une section rectangulaire constante ne permet donc
-                    pas de satisfaire simultanément les exigences de résistance et de rigidité. Cette première
-                    modélisation constitue une base de comparaison pour la poursuite de l'étude et l'exploration d'une
-                    géométrie plus adaptée.
-                </p>
+                <div class="space-y-4 text-base leading-relaxed text-slate-700">
+                    <p>
+                        Cette première étude vise à simplifier le comportement mécanique du pied prothétique en le
+                        modélisant comme une poutre, afin d'établir un premier dimensionnement analytique.
+                    </p>
+                    <p>
+                        Dans un premier temps, une poutre à section rectangulaire constante a été étudiée. Les résultats
+                        mettent en évidence un compromis entre les critères de résistance et de rigidité.
+                    </p>
+                    <p>
+                        Lorsque la section est dimensionnée pour respecter le critère de contrainte, la rigidité obtenue
+                        reste insuffisante, avec une flèche calculée de 23 mm. À l'inverse, lorsque le dimensionnement
+                        vise à respecter le critère de rigidité, les contraintes dépassent la limite admissible. Dans le
+                        cadre de ces hypothèses, une section rectangulaire constante ne permet donc pas de satisfaire
+                        simultanément les exigences de résistance et de rigidité.
+                    </p>
+                    <p>
+                        L'espace ci-dessous est réservé à la feuille de calcul consacrée à une poutre encastrée à sa
+                        base, de section rectangulaire variable : sa largeur est constante et sa hauteur évolue le long
+                        de la poutre. Cette modélisation permet d'étudier l'effet de cette variation de section sur les
+                        contraintes et la flèche.
+                    </p>
+                </div>
 
                 <section aria-label="Espace réservé à la feuille de calcul"
                     class="min-h-[640px] rounded-lg border border-slate-200 bg-white shadow-sm">
