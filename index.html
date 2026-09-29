@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <!-- Onglets de navigation principaux (Mapping / CdCF) -->
+        <!-- Onglets de navigation principaux -->
         <div class="flex items-center space-x-2 bg-amViolet-900 p-1.5 rounded-2xl border border-amViolet-700 shadow-inner">
             <button onclick="switchTab('mapping')" id="tab-btn-mapping"
                 class="px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm">
@@ -78,6 +78,11 @@
                 class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
                 <i class="fa-solid fa-file-lines"></i>
                 <span>CdCF</span>
+            </button>
+            <button onclick="switchTab('etude1')" id="tab-btn-etude1"
+                class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Etude 1</span>
             </button>
         </div>
 
@@ -325,6 +330,33 @@
                     </iframe>
                 </section>
                 </div>
+            </div>
+        </div>
+
+        <!-- ================= VUE 3 : ETUDE 1 ================= -->
+        <div id="view-etude1" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto p-10 w-full h-full">
+            <div class="max-w-6xl mx-auto w-full space-y-8">
+                <h2 class="text-3xl font-bold underline text-slate-900">Etude 1 hypothèse poutres</h2>
+
+                <p class="text-base leading-relaxed text-slate-700">
+                    Cette première étude vise à simplifier le comportement mécanique du pied prothétique en le modélisant
+                    comme une poutre, afin d'établir un premier dimensionnement analytique. Une poutre à section
+                    rectangulaire constante a été considérée. Les résultats mettent en évidence un compromis entre les
+                    critères de résistance et de rigidité : lorsque la section est dimensionnée pour respecter le critère
+                    de contrainte, la rigidité obtenue reste insuffisante, avec une flèche calculée de 23 mm. À l'inverse,
+                    lorsque le dimensionnement vise à respecter le critère de rigidité, les contraintes dépassent la
+                    limite admissible. Dans le cadre de ces hypothèses, une section rectangulaire constante ne permet donc
+                    pas de satisfaire simultanément les exigences de résistance et de rigidité. Cette première
+                    modélisation constitue une base de comparaison pour la poursuite de l'étude et l'exploration d'une
+                    géométrie plus adaptée.
+                </p>
+
+                <section aria-label="Espace réservé à la feuille de calcul"
+                    class="min-h-[640px] rounded-lg border border-slate-200 bg-white shadow-sm">
+                    <h3 class="border-b border-slate-200 px-5 py-4 text-sm font-semibold text-slate-600">
+                        Feuille de calcul
+                    </h3>
+                </section>
             </div>
         </div>
 
@@ -819,24 +851,16 @@
             populatePatentListModal();
         };
 
-        // Gestion de la navigation entre les onglets (Mapping vs CdCF)
+        // Gestion de la navigation entre les onglets
         function switchTab(tabName) {
-            const btnMapping = document.getElementById('tab-btn-mapping');
-            const btnCdcf = document.getElementById('tab-btn-cdcf');
-            const viewMapping = document.getElementById('view-mapping');
-            const viewCdcf = document.getElementById('view-cdcf');
+            const tabNames = ['mapping', 'cdcf', 'etude1'];
+            const activeClass = "px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm";
+            const inactiveClass = "px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800";
 
-            if (tabName === 'mapping') {
-                btnMapping.className = "px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm";
-                btnCdcf.className = "px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800";
-                viewMapping.classList.remove('hidden');
-                viewCdcf.classList.add('hidden');
-            } else {
-                btnCdcf.className = "px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm";
-                btnMapping.className = "px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800";
-                viewCdcf.classList.remove('hidden');
-                viewMapping.classList.add('hidden');
-            }
+            tabNames.forEach(name => {
+                document.getElementById(`tab-btn-${name}`).className = name === tabName ? activeClass : inactiveClass;
+                document.getElementById(`view-${name}`).classList.toggle('hidden', name !== tabName);
+            });
         }
 
         // ---------------------------------------------------------------
