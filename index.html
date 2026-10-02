@@ -336,14 +336,18 @@
 
                     <figure class="space-y-3">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <video controls playsinline preload="metadata" class="w-full rounded-lg border border-slate-200 bg-black">
-                                <source src="cdcf/Marche.mp4" type="video/mp4">
-                                Votre navigateur ne peut pas lire cette vidéo. <a href="cdcf/Marche.mp4" class="underline">Ouvrir la vidéo.</a>
-                            </video>
-                            <video controls playsinline preload="metadata" class="w-full rounded-lg border border-slate-200 bg-black">
-                                <source src="cdcf/marche%20ordi.mp4" type="video/mp4">
-                                Votre navigateur ne peut pas lire cette vidéo. <a href="cdcf/marche%20ordi.mp4" class="underline">Ouvrir la vidéo.</a>
-                            </video>
+                            <div class="aspect-video w-full overflow-hidden rounded-lg border border-slate-200 bg-black">
+                                <video controls playsinline preload="metadata" class="h-full w-full object-contain">
+                                    <source src="cdcf/Marche.mp4" type="video/mp4">
+                                    Votre navigateur ne peut pas lire cette vidéo. <a href="cdcf/Marche.mp4" class="underline">Ouvrir la vidéo.</a>
+                                </video>
+                            </div>
+                            <div class="aspect-video w-full overflow-hidden rounded-lg border border-slate-200 bg-black">
+                                <video controls playsinline preload="metadata" class="h-full w-full object-contain">
+                                    <source src="cdcf/marche%20ordi.mp4" type="video/mp4">
+                                    Votre navigateur ne peut pas lire cette vidéo. <a href="cdcf/marche%20ordi.mp4" class="underline">Ouvrir la vidéo.</a>
+                                </video>
+                            </div>
                         </div>
                         <figcaption class="text-center italic text-slate-600">Capture du mouvement</figcaption>
                     </figure>
