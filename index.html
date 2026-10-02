@@ -312,6 +312,53 @@
             <div class="max-w-6xl mx-auto w-full space-y-8">
                 <h2 class="text-3xl font-bold underline text-slate-900">Cahier des charges fonctionnel</h2>
 
+                <section aria-labelledby="contexte-projet" class="space-y-6 text-base leading-relaxed text-slate-700">
+                    <h3 id="contexte-projet" class="text-2xl font-bold text-slate-900">Contexte du projet</h3>
+                    <p>Dans le cadre de notre formation, ce projet a pour objectif de <strong>concevoir et dimensionner un pied prothétique destiné à un enfant de pointure 35</strong>, fabriqué par impression 3D en <strong>PLA</strong>, pour un poids de référence de <strong>270 N</strong>. Le projet constitue un support permettant de mobiliser progressivement les compétences développées au cours des différentes unités d’enseignement, notamment en <strong>mécanique des milieux continus, résistance des matériaux, mécanique, matériaux et conception</strong>, afin de les appliquer directement à une problématique concrète d’ingénierie biomécanique.</p>
+                    <p>La conception du pied s'appuie sur une <strong>analyse expérimentale de la marche</strong>. Dans un premier temps, des données sont acquises sur un sujet non amputé afin de caractériser le comportement du membre inférieur lors de la marche. Des <strong>marqueurs réfléchissants sont placés sur différents repères anatomiques de la jambe et du pied</strong>. Un système de caméras permet de suivre leurs positions au cours du mouvement et ainsi de reconstruire la cinématique des différents segments. Cette méthode permet notamment d'obtenir l'évolution temporelle des <strong>angles articulaires</strong> au cours du cycle de marche. Le protocole présenté par Uchida et Delp repose sur ce principe de suivi des marqueurs et de calcul des angles articulaires à partir de la cinématique du mouvement.</p>
+
+                    <figure class="space-y-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <img src="cdcf/capteurs.png" alt="Marqueurs réfléchissants utilisés pour l'analyse du mouvement" class="w-full h-auto rounded-lg border border-slate-200 bg-white object-contain">
+                            <img src="cdcf/camera.png" alt="Caméra utilisée pour la capture du mouvement" class="w-full h-auto rounded-lg border border-slate-200 bg-white object-contain">
+                        </div>
+                        <figcaption class="text-center italic text-slate-600">Marqueurs et prise de données</figcaption>
+                    </figure>
+
+                    <p>La capture du mouvement est réalisée dans une salle équipée d'une <strong>plateforme de force intégrée au sol</strong>. Celle-ci mesure les forces de réaction du sol ainsi que les moments associés lors de la phase d'appui. Les données cinématiques et les données de force peuvent alors être combinées afin de déterminer les sollicitations mécaniques exercées sur le membre inférieur. Le protocole de TP prévoit notamment le calcul des angles de la cheville, du genou et de la hanche, puis le transport des moments mesurés au niveau de la plateforme vers les centres articulaires de la cheville, du genou et de la hanche.</p>
+
+                    <figure class="space-y-3">
+                        <img src="cdcf/capture%20ordi%20force%20de%20reaction.HEIC" alt="Capture de l'analyse de la réaction du sol" class="mx-auto max-w-full max-h-[32rem] h-auto rounded-lg border border-slate-200 bg-white object-contain">
+                        <figcaption class="text-center italic text-slate-600">Réaction du sol</figcaption>
+                        <a href="cdcf/capture%20ordi%20force%20de%20reaction.HEIC" class="block text-center text-sm text-amViolet-800 underline">Ouvrir l'image originale (HEIC)</a>
+                    </figure>
+
+                    <p>À partir de ces mesures, un <strong>sujet non amputé</strong> est utilisé comme référence afin d'obtenir les caractéristiques d'une marche de référence. Une seconde acquisition est ensuite réalisée avec le même sujet équipé des <strong>pieds prothétiques étudiés</strong>. Les deux séries de mesures peuvent alors être comparées afin d'identifier les différences de comportement entre la marche de référence et la marche avec les pieds prothétiques.</p>
+
+                    <figure class="space-y-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <video controls playsinline preload="metadata" class="w-full rounded-lg border border-slate-200 bg-black">
+                                <source src="cdcf/Marche.mov" type="video/quicktime">
+                                Votre navigateur ne peut pas lire cette vidéo. <a href="cdcf/Marche.mov" class="underline">Ouvrir la vidéo.</a>
+                            </video>
+                            <video controls playsinline preload="metadata" class="w-full rounded-lg border border-slate-200 bg-black">
+                                <source src="cdcf/marche%20ordi.mov" type="video/quicktime">
+                                Votre navigateur ne peut pas lire cette vidéo. <a href="cdcf/marche%20ordi.mov" class="underline">Ouvrir la vidéo.</a>
+                            </video>
+                        </div>
+                        <figcaption class="text-center italic text-slate-600">Capture du mouvement</figcaption>
+                    </figure>
+
+                    <p>L'objectif du projet est ainsi de concevoir un pied dont le comportement se rapproche autant que possible de celui observé lors de la marche de référence, tout en respectant les contraintes mécaniques imposées par le cahier des charges. Le pied devra notamment <strong>résister aux sollicitations appliquées pendant la marche, présenter une rigidité adaptée et limiter les perturbations du mouvement</strong> susceptibles d'entraîner une sollicitation excessive des autres articulations. Cette approche rejoint l'intérêt de l'analyse quantifiée de la marche dans l'étude des dispositifs prothétiques, qui permet d'objectiver les différences de comportement entre différentes situations d'appareillage.</p>
+
+                    <figure class="space-y-3">
+                        <div class="flex min-h-64 items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-white text-slate-500">
+                            <span>Vidéo au ralenti du sujet en marche à ajouter</span>
+                        </div>
+                        <figcaption class="text-center italic text-slate-600">Marche au ralenti</figcaption>
+                    </figure>
+                </section>
+
                 <figure class="space-y-3">
                     <h3 class="text-xl font-semibold text-slate-800">Bête à cornes</h3>
                     <img src="cdcf/Bete%20%C3%A0%20cornes.png" alt="Diagramme bête à cornes du pied prothétique"
