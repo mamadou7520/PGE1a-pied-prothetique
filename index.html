@@ -462,7 +462,6 @@
 
                     <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                         <img src="image/figure%201%20vue%20en%20coupe%20d%27un%20pied%20proth%C3%A9tique.png" alt="Vue en coupe d'un pied prothétique imprimé avec une structure creuse et des parois périphériques" class="max-h-[34rem] w-full bg-white object-contain p-3">
-                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 1 — Vue en coupe d’un pied prothétique dans Cura</figcaption>
                     </figure>
 
                     <p>L’objectif du TP était de caractériser le comportement mécanique d’une poutre en régime de flexion simple. Pour cela, il fallait :</p>
@@ -500,24 +499,84 @@
                     </div>
                 </section>
 
-                <section aria-labelledby="conclusions-tp-pla" class="space-y-4">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                        <div>
-                            <h3 id="conclusions-tp-pla" class="text-2xl font-bold text-slate-900">Conclusions tirées du TP</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-slate-600">La conclusion, ses tableaux et ses figures sont conservés dans leur mise en page d’origine, aux dernières pages du compte rendu.</p>
+                <section aria-labelledby="conclusions-tp-pla" class="space-y-6 text-base leading-relaxed text-slate-700">
+                    <h3 id="conclusions-tp-pla" class="text-2xl font-bold text-slate-900">Conclusions tirées du TP</h3>
+
+                    <article class="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+                        <h4 class="text-xl font-semibold text-slate-900">1. Écarts avec la fiche technique Ultimaker</h4>
+                        <p>Nos mesures sont du même ordre de grandeur que la fiche : les écarts vont de 0 à 17 %, avec un module identique pour XY. Les écarts positifs dominent pour σ<sub>max</sub> et E dans les sens YZ et Z. Pour XY et YZ, la fiche annonce l’absence de rupture au-delà de 10 % de déformation, alors que nos éprouvettes perdent leur portance vers 5 à 6 % : la comparaison de ε<sub>fB</sub> n’a donc de sens que pour Z, et c’est avec ε à σ<sub>fM</sub> que l’on compare les autres sens. Hypothèses expliquant ces différences :</p>
+                        <ol class="list-decimal space-y-3 pl-6 marker:font-semibold marker:text-amViolet-800">
+                            <li><strong>Nombre d’éprouvettes.</strong> On en a testé 2 par sens au lieu de 5. L’écart entre deux éprouvettes du même sens atteint 7 % sur σ<sub>max</sub> (YZ : 97,3 et 90,7 MPa) et 4 % sur E (XY). Plusieurs écarts à la fiche, comme −8,5 % sur σ<sub>max</sub> en XY, sont donc du même ordre que la dispersion.</li>
+                            <li><strong>Préparation des éprouvettes et tare à 1 N.</strong> Certaines pièces étaient mal ébavurées et l’enregistrement ne commence qu’à 1 N. Le déplacement initial (de 0,2 à 1,8 mm selon les essais) est donc compté dans la déformation de la colonne D. Ce décalage représente environ 0,5 % de déformation. Corrigées de ce décalage, les valeurs de ε à σ<sub>fM</sub> passent à 3,96 % (XY), 4,38 % (YZ) et 3,06 % (Z), soit −3,5 %, −0,5 % et −10 % par rapport à la fiche. Les bavures créent aussi des défauts de contact et des concentrations de contrainte.</li>
+                            <li><strong>Géométrie hors norme.</strong> Nos éprouvettes (128 × 15 × 8 mm) sont deux fois plus épaisses que l’éprouvette normalisée de l’ISO 178 (80 × 10 × 4 mm). Elles comptent plus de couches, refroidissent plus lentement et ont davantage de défauts potentiels. La déformation est de plus calculée à partir du déplacement de la traverse, et non mesurée au déflectomètre comme le prévoit la norme : la complaisance de la machine et l’indentation aux appuis sont comptées dans la flèche.</li>
+                            <li><strong>Vitesse d’essai.</strong> Les données enregistrées donnent 10 mm/min, contre 5 mm/min pour la résistance et 1 mm/min pour le module dans la fiche. Le PLA étant viscoélastique, une vitesse plus élevée augmente le module et la résistance, ce qui va dans le sens des écarts positifs observés en YZ et en Z.</li>
+                            <li><strong>Paramètres d’impression.</strong> L’imprimante, la température, la hauteur de couche, le motif de remplissage et le refroidissement ne sont pas ceux du fabricant. Ils agissent surtout sur l’adhésion entre couches.</li>
+                        </ol>
+                    </article>
+
+                    <article class="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+                        <h4 class="text-xl font-semibold text-slate-900">2. Effet du sens d’impression</h4>
+                        <p>L’ordre mesuré est YZ &gt; XY &gt; Z pour la résistance (94,0 / 83,8 / 69,4 MPa) et pour ε à σ<sub>fM</sub> (4,84 / 4,52 / 3,55 %). Pour le module, YZ ≈ XY &gt; Z (2 934 / 2 881 / 2 503 MPa). Le sens Z est le plus faible : −17 % de résistance et −13 % de module par rapport à XY, et une rupture fragile au pic de contrainte (ε<sub>fB</sub> ≈ ε à σ<sub>fM</sub> ≈ 3,55 %).</p>
+                        <ul class="list-disc space-y-3 pl-6 marker:text-amViolet-800">
+                            <li><strong>Sens Z.</strong> La barre est dressée dans le sens de l’empilement : la traction des fibres extrêmes s’exerce perpendiculairement aux couches. L’effort est repris par les soudures entre couches, plus faibles que le filament lui-même et plus poreuses (la thèse rapporte, pour les pièces à filaments renforcés, des porosités principalement situées entre les couches). La rupture se fait par décohésion entre deux couches, de façon brutale.</li>
+                            <li><strong>Sens XY et YZ.</strong> La contrainte de traction est parallèle aux filaments. C’est la matière du filament qui travaille, d’où une résistance plus élevée et une rupture plus progressive.</li>
+                            <li><strong>XY contre YZ.</strong> Notre mesure donne un avantage à YZ (+12 % de résistance), alors que la fiche donne l’inverse (XY +10 %).</li>
+                        </ul>
+                        <p>Tous les résultats concordent sur un point : le sens Z est à éviter, avec un rapport σ<sub>Z</sub>/σ<sub>XY</sub> de 0,83 mesuré et 0,67 d’après la fiche.</p>
+                    </article>
+
+                    <article class="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+                        <h4 class="text-xl font-semibold text-slate-900">3. Application au projet de pied prothétique</h4>
+                        <p><strong>Sens d’impression optimal.</strong> La lame travaille en flexion : la contrainte maximale s’exerce le long de sa longueur, sur ses faces supérieure et inférieure. On imprime donc la lame avec sa longueur dans le plan du plateau (sens XY ou YZ), jamais selon Z. Entre XY et YZ, on retient XY (lame à plat, couches empilées dans l’épaisseur) : c’est le sens le plus cohérent avec la fiche et avec la littérature citée par la thèse, qui recommande d’imprimer avec les couches perpendiculaires à la direction de la force en flexion 3 points (résultat établi pour des composites à fibres continues). Notre mesure favorise légèrement YZ, mais l’écart est dans la dispersion : YZ est peut-être à tester sur une lame réelle avant de trancher.</p>
+
+                        <p><strong>Remplissage et répartition de matière.</strong> Les résultats conduisent à :</p>
+                        <ul class="list-disc space-y-3 pl-6 marker:text-amViolet-800">
+                            <li><strong>Peaux haute et basse épaisses</strong> (au moins 2,4 mm, soit 16 couches de 0,15 mm). C’est le paramètre qui pilote la raideur (abaque, tableau 2) et la tenue de la fibre extrême.</li>
+                            <li><strong>Parois de 4 mm (5 lignes)</strong>, comme sur la figure 1 du sujet. Elles ont peu d’effet sur la raideur en flexion, mais elles protègent le cœur et reprennent le cisaillement et la stabilité locale.</li>
+                            <li><strong>Remplissage de 20 %</strong> (triangulaire, comme dans la thèse qui utilise un remplissage triangulaire à 30 %) plutôt que 10 %. Il ne coûte presque rien en raideur (la thèse rapporte aussi que le taux de remplissage influence peu les propriétés en flexion), mais il soutient les peaux contre l’indentation et reprend le cisaillement, deux mécanismes qui ont dégradé nos poutres creuses.</li>
+                            <li><strong>Zones pleines (100 %)</strong> aux points d’encastrement, d’introduction de l’effort et à la jonction entre lame avant et lame du talon. Dans la thèse, le prototype en PLA Tough s’est rompu à cet endroit après environ 23 000 cycles, ce qui est bien inférieur à l’attendu.</li>
+                        </ul>
+
+                        <p><strong>Gain de masse réaliste.</strong> À 10 % de remplissage, nos essais donnent −17 % de raideur et −23 % de résistance pour environ 17 à 27 % de matière en moins. L’allègement n’est donc pas gratuit pour une section de 8 mm. Le modèle prévoit un bénéfice plus marqué pour des lames plus épaisses, où la zone neutre est plus grande ((h<sub>i</sub>/h)<sup>3</sup> croît avec l’épaisseur), mais cela reste à vérifier par essai.</p>
+
+                        <p><strong>Valeurs à retenir pour le calcul par éléments finis.</strong> On suit la modélisation de la thèse : matériau isotrope linéaire élastique, avec un coefficient de Poisson de 0,35 (valeur du PLA retenue dans la thèse). Pour la résistance, on utilise une limite élastique conventionnelle plutôt que σ<sub>max</sub>, le PLA étant fragile et la courbe déjà non linéaire avant le pic. On la définit comme la contrainte où le module sécant perd 5 % par rapport à la pente initiale.</p>
+
+                        <div class="overflow-x-auto rounded-lg border border-slate-200">
+                            <table class="min-w-full border-collapse text-left text-sm">
+                                <caption class="bg-slate-50 px-4 py-3 text-left font-semibold text-slate-800">Tableau 4 — Données d’entrée proposées pour le calcul par éléments finis (sens XY)</caption>
+                                <thead class="bg-amViolet-900 text-white">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 font-semibold">Paramètre</th>
+                                        <th scope="col" class="px-4 py-3 font-semibold">Valeur</th>
+                                        <th scope="col" class="px-4 py-3 font-semibold">Source et commentaire</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white">
+                                    <tr class="align-top"><th scope="row" class="px-4 py-3 font-medium text-slate-800">Module E, zones pleines (peaux, parois, zones à 100 %)</th><td class="px-4 py-3">2,8 GPa</td><td class="px-4 py-3">Mesuré en XY (2 803 MPa sur la plage ISO, 2 881 MPa sur le domaine élastique), proche de la fiche (2 882 MPa).</td></tr>
+                                    <tr class="align-top bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">Module E, zone de remplissage</th><td class="px-4 py-3">τ · E (soit 0,2 × 2,8 GPa à 20 %)</td><td class="px-4 py-3">Loi des mélanges utilisée dans la thèse.</td></tr>
+                                    <tr class="align-top"><th scope="row" class="px-4 py-3 font-medium text-slate-800">Limite élastique conventionnelle, zones pleines</th><td class="px-4 py-3">≈ 69 MPa</td><td class="px-4 py-3">Mesuré en XY (66,7 et 70,7 MPa), pour une déformation d’environ 2,5 %. σ<sub>max</sub> vaut 83,8 MPa.</td></tr>
+                                    <tr class="align-top bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">Limite élastique d’une poutre creuse à 10 %</th><td class="px-4 py-3">≈ 54 MPa (apparent)</td><td class="px-4 py-3">Mesuré en XY 10 % ; σ<sub>max</sub> vaut 64,5 MPa.</td></tr>
+                                    <tr class="align-top"><th scope="row" class="px-4 py-3 font-medium text-slate-800">Coefficient de Poisson</th><td class="px-4 py-3">0,35</td><td class="px-4 py-3">Valeur retenue dans la thèse pour le PLA.</td></tr>
+                                    <tr class="align-top bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">Coefficient de sécurité</th><td class="px-4 py-3">4</td><td class="px-4 py-3">Valeur adoptée dans le CdCF.</td></tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <a href="compte%20rendu%20TP%20Diene%20Berisson%20PGE%201APP.pdf#page=7" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-amOrange px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amOrangeDark">
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                            <span>Ouvrir le compte rendu</span>
-                        </a>
-                    </div>
-                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                        <iframe src="compte%20rendu%20TP%20Diene%20Berisson%20PGE%201APP.pdf#page=7&zoom=page-fit"
-                            title="Conclusion du compte rendu du TP de flexion 3 points, avec texte, tableaux et figures"
-                            class="h-[80vh] min-h-[640px] w-full bg-white">
-                        </iframe>
-                    </div>
+                        <p class="text-sm italic text-slate-600">Ces valeurs sont statiques.</p>
+                    </article>
+
+                    <article class="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+                        <h4 class="text-xl font-semibold text-slate-900">4. Limites et suites</h4>
+                        <ul class="list-disc space-y-3 pl-6 marker:text-amViolet-800">
+                            <li><strong>Pour consolider :</strong> 5 éprouvettes par configuration, mesure de la flèche au déflectomètre, essai à la vitesse de la fiche (5 mm/min), coupe d’une éprouvette creuse pour mesurer les épaisseurs réelles de parois et de peaux, essai d’une configuration creuse en YZ.</li>
+                            <li>Les écarts à la fiche sont à interpréter avec prudence tant que la correction du décalage initial (ε<sub>0</sub>) n’est pas appliquée de façon homogène à toutes les déformations.</li>
+                        </ul>
+                    </article>
+
+                    <article class="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-5 sm:p-7">
+                        <h4 class="text-lg font-semibold text-slate-900">Références</h4>
+                        <p class="text-sm">A. Louessard, <i>Conception et prototypage de pied prothétique obtenu par fabrication additive</i>, thèse HESAM Université / Arts et Métiers, 2023 (HAL tel-04439541) : équation I-15 et annexe A (module de flexion équivalent), chapitre III (choix des matériaux, tableau III-12, modélisation du remplissage, essais de fatigue).</p>
+                        <p class="text-sm">Fiche technique Ultimaker PLA : propriétés mécaniques (ISO 178). Norme ISO 178 : détermination des propriétés en flexion.</p>
+                    </article>
                 </section>
             </div>
         </div>
