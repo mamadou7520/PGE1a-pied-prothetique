@@ -84,6 +84,11 @@
                 <i class="fa-solid fa-calculator"></i>
                 <span>Etude 1</span>
             </button>
+            <button onclick="switchTab('etude2')" id="tab-btn-etude2"
+                class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
+                <i class="fa-solid fa-flask"></i>
+                <span>Etude 2 : PLA</span>
+            </button>
         </div>
 
         <div class="flex items-center space-x-3">
@@ -426,6 +431,93 @@
                         title="Notes de calcul de poutre au format PDF"
                         class="h-[85vh] min-h-[640px] w-full bg-white">
                     </iframe>
+                </section>
+            </div>
+        </div>
+
+        <!-- ================= VUE 4 : ETUDE 2 - PLA ================= -->
+        <div id="view-etude2" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto px-6 py-8 md:px-10 w-full h-full">
+            <div class="max-w-6xl mx-auto w-full space-y-10">
+                <h2 class="text-3xl font-bold underline text-slate-900">Etude 2 : PLA</h2>
+
+                <section aria-label="Imprimante Ultimaker et fiche technique du PLA" class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                            <img src="image/images.jpg" alt="Imprimante 3D Ultimaker utilisée pour fabriquer les éprouvettes" class="h-full w-full object-contain">
+                        </div>
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Imprimante 3D Ultimaker</figcaption>
+                    </figure>
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                            <img src="image/data%20sheet%20PLA%20ultimaker.png" alt="Fiche technique fournisseur des propriétés mécaniques du PLA Ultimaker" class="h-full w-full object-contain">
+                        </div>
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Fiche technique du PLA Ultimaker</figcaption>
+                    </figure>
+                </section>
+
+                <section aria-labelledby="introduction-pla" class="space-y-6 text-base leading-relaxed text-slate-700">
+                    <h3 id="introduction-pla" class="text-2xl font-bold text-slate-900">Introduction</h3>
+                    <p>Dans le projet, la lame du pied prothétique travaille en flexion : lors de la marche, elle se comporte comme une poutre encastrée côté jambe et chargée à son extrémité. La raideur du pied et la restitution d’énergie dépendent donc de sa raideur en flexion. Or, en flexion, la contrainte normale est nulle sur la fibre neutre et maximale sur les fibres extrêmes : la matière située au cœur de la section travaille très peu.</p>
+                    <p>On ne met donc pas de matière sur la ligne neutre (figure 1 ci-dessous) : la pièce est imprimée avec des parois et un remplissage faible (modèle « creux »). Sa raideur est peu pénalisée puisque le moment quadratique <i>I</i> dépend surtout de la matière éloignée de l’axe neutre. Mais une pièce imprimée est anisotrope (sens d’impression, adhésion entre couches) et son comportement dépend du remplissage et des parois.</p>
+
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <img src="image/figure%201%20vue%20en%20coupe%20d%27un%20pied%20proth%C3%A9tique.png" alt="Vue en coupe d'un pied prothétique imprimé avec une structure creuse et des parois périphériques" class="max-h-[34rem] w-full bg-white object-contain p-3">
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 1 — Vue en coupe d’un pied prothétique dans Cura</figcaption>
+                    </figure>
+
+                    <p>L’objectif du TP était de caractériser le comportement mécanique d’une poutre en régime de flexion simple. Pour cela, il fallait :</p>
+                    <ol class="list-decimal space-y-2 pl-6">
+                        <li><strong>Réaliser</strong> un essai de flexion 3 points selon la norme ISO 178 (version simplifiée).</li>
+                        <li><strong>Transformer</strong> la courbe brute effort-déplacement en courbe contrainte-déformation.</li>
+                        <li><strong>Déterminer</strong> les propriétés mécaniques du matériau dans le domaine élastique.</li>
+                    </ol>
+
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <img src="image/flexion%203%20points.png" alt="Machine Instron utilisée pour l'essai de flexion trois points" class="max-h-[36rem] w-full bg-white object-contain p-3">
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Montage expérimental — Essai de flexion 3 points</figcaption>
+                    </figure>
+                </section>
+
+                <section aria-labelledby="donnees-experimentales-pla" class="space-y-4">
+                    <h3 id="donnees-experimentales-pla" class="text-2xl font-bold text-slate-900">Données expérimentales</h3>
+                    <div class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <p class="font-semibold text-slate-800">Résultats de l’essai de flexion 3 points</p>
+                            <p class="mt-1 text-sm text-slate-500">Classeur Excel des mesures et calculs expérimentaux.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="Tp%20Flexion%203%20points%20DIENE%20BERISSON.xlsx" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 rounded-lg border border-amViolet-700 px-4 py-2.5 text-sm font-semibold text-amViolet-800 transition hover:bg-amViolet-800 hover:text-white">
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                <span>Ouvrir le fichier</span>
+                            </a>
+                            <a href="Tp%20Flexion%203%20points%20DIENE%20BERISSON.xlsx" download
+                                class="inline-flex items-center gap-2 rounded-lg bg-amOrange px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amOrangeDark">
+                                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                                <span>Télécharger</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section aria-labelledby="conclusions-tp-pla" class="space-y-4">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <h3 id="conclusions-tp-pla" class="text-2xl font-bold text-slate-900">Conclusions tirées du TP</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">La conclusion, ses tableaux et ses figures sont conservés dans leur mise en page d’origine, aux dernières pages du compte rendu.</p>
+                        </div>
+                        <a href="compte%20rendu%20TP%20Diene%20Berisson%20PGE%201APP.pdf#page=7" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-amOrange px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amOrangeDark">
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            <span>Ouvrir le compte rendu</span>
+                        </a>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <iframe src="compte%20rendu%20TP%20Diene%20Berisson%20PGE%201APP.pdf#page=7&zoom=page-fit"
+                            title="Conclusion du compte rendu du TP de flexion 3 points, avec texte, tableaux et figures"
+                            class="h-[80vh] min-h-[640px] w-full bg-white">
+                        </iframe>
+                    </div>
                 </section>
             </div>
         </div>
@@ -923,7 +1015,7 @@
 
         // Gestion de la navigation entre les onglets
         function switchTab(tabName) {
-            const tabNames = ['mapping', 'cdcf', 'etude1'];
+            const tabNames = ['mapping', 'cdcf', 'etude1', 'etude2'];
             const activeClass = "px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm";
             const inactiveClass = "px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800";
 
