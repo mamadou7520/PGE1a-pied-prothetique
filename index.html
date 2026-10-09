@@ -51,6 +51,24 @@
             background: #F7A400;
         }
     </style>
+    <!-- KaTeX : rendu des formules du rapport de calcul de poutre (Etude 1) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('rapport-poutre');
+            if (el && window.renderMathInElement) {
+                renderMathInElement(el, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '\\(', right: '\\)', display: false }
+                    ],
+                    throwOnError: false
+                });
+            }
+        });
+    </script>
 </head>
 
 <body class="h-full bg-slate-100 text-slate-800 font-sans antialiased overflow-hidden flex flex-col">
@@ -416,22 +434,274 @@
                     </p>
                 </div>
 
-                <section aria-label="Notes de calcul de poutre"
-                    class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
-                        <h3 class="text-sm font-semibold text-slate-700">Notes de calcul de poutre</h3>
-                        <a href="Rapport1_Calcul_de_poutre_DIENE_BERISSON_PGE1a-1.pdf" target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 rounded-lg bg-amOrange px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amOrangeDark">
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                            <span>Ouvrir le PDF</span>
-                        </a>
-                    </div>
-                    <iframe src="Rapport1_Calcul_de_poutre_DIENE_BERISSON_PGE1a-1.pdf"
-                        title="Notes de calcul de poutre au format PDF"
-                        class="h-[85vh] min-h-[640px] w-full bg-white">
-                    </iframe>
-                </section>
+                <!-- ========= Notes de calcul de poutre : rendu LaTeX (KaTeX) + schémas SVG ========= -->
+                <style>
+                    #rapport-poutre .sv-m { font-family: KaTeX_Math, "Times New Roman", serif; font-style: italic; }
+                    #rapport-poutre .sv-r { font-family: KaTeX_Main, "Times New Roman", serif; font-style: normal; }
+                    #rapport-poutre .katex { font-size: 1.08em; color: #1e293b; }
+                    #rapport-poutre .katex-display { margin: .55em 0; padding: .1rem 0; overflow-x: auto; overflow-y: hidden; }
+                    #rapport-poutre .eq { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: .6rem; background: #f8fafc; padding: .35rem .9rem; }
+                    #rapport-poutre dd .katex { white-space: nowrap; }
+                    #rapport-poutre .eq-key .katex { font-size: 1.22em; }
+                    #rapport-poutre .eq-key { border: 1px solid #fde4a8; border-left: 4px solid #F7A400; border-radius: .6rem; background: #fffbeb; padding: .5rem .9rem; }
+                </style>
+
+                <div id="rapport-poutre" class="space-y-6">
+
+                    <!-- ============ Bannière ============ -->
+                    <header class="overflow-hidden rounded-xl bg-amViolet-800 px-6 py-7 text-white shadow-sm sm:px-8">
+                        <div class="flex items-start gap-5">
+                            <div class="mt-1 h-14 w-2.5 shrink-0 bg-amOrange" style="transform: skewX(-20deg)"></div>
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-widest text-amber-200">Notes de calcul de poutre</p>
+                                <h3 class="mt-1 text-2xl font-bold leading-tight tracking-wide sm:text-3xl">Premier calcul de poutre pour pied prothétique</h3>
+                                <p class="mt-3 text-base font-medium text-white">Mamadou DIENE&nbsp;; Natan BERISSON</p>
+                                <p class="text-sm text-slate-200">PGE1A – Arts et Métiers</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- ============ 1. Données et problématique ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">1</span>
+                            Données et problématique
+                        </h4>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                            <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 464 416" role="img" aria-label="Poutre encastrée à section variable, vue de côté et vue de dessus" class="mx-auto h-auto w-full max-w-lg"><defs><pattern id="hn-f1" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-f1" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-f1-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-f1-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-f1-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-f1-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-f1-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-f1-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-f1-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-f1-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-f1-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-f1-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-f1-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-f1-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><text x="66" y="74.3" text-anchor="end" font-size="18" fill="#475569"><tspan class="sv-r">côté</tspan></text><rect x="114" y="20" width="14" height="96" fill="url(#hn-f1)"/><line x1="128" y1="116" x2="128" y2="20" stroke="#0f172a" stroke-width="2.2"/><polygon points="128,108 408,108 408,88 128,28" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2" stroke-linejoin="round"/><line x1="104" y1="108" x2="104" y2="28" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f1-gn)" marker-start="url(#as-f1-gn)"/><text x="98" y="74.3" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">h</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">0</tspan></text><line x1="424" y1="108" x2="424" y2="88" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f1-gs)" marker-start="url(#as-f1-gs)"/><text x="431.2" y="104.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">h</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">L</tspan></text><line x1="128" y1="132" x2="408" y2="132" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f1-gn)" marker-start="url(#as-f1-gn)"/><text x="268" y="153.5" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text><line x1="140" y1="196" x2="180" y2="196" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-f1-kn)"/><text x="186" y="202.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><path d="M186,188 L196.8,188 M193.2,185.2 L196.8,188 L193.2,190.8" fill="none" stroke="#0f172a" stroke-width="1.1"/><line x1="140" y1="196" x2="140" y2="166" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-f1-kn)"/><text x="132.8" y="183.1" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">y</tspan></text><path d="M123.2,168.8 L134,168.8 M130.4,166 L134,168.8 L130.4,171.6" fill="none" stroke="#0f172a" stroke-width="1.1"/><line x1="408" y1="88" x2="408" y2="20" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/><line x1="432.8" y1="20.4" x2="408" y2="88" stroke="#7F2060" stroke-width="2.4" marker-end="url(#ae-f1-vn)"/><text x="431.2" y="49.5" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">F</tspan></text><path d="M408,60 A28,28 0 0 1 417.58,61.69" fill="none" stroke="#7F2060" stroke-width="1.3"/><text x="384" y="52.3" text-anchor="middle" font-size="18" fill="#7F2060"><tspan class="sv-r">20°</tspan></text><text x="66" y="318.3" text-anchor="end" font-size="18" fill="#475569"><tspan class="sv-r">dessus</tspan></text><rect x="114" y="268" width="14" height="88" fill="url(#hn-f1)"/><rect x="128" y="268" width="280" height="88" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2"/><line x1="424" y1="356" x2="424" y2="268" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f1-gn)" marker-start="url(#as-f1-gn)"/><text x="431.2" y="318.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">b</tspan></text><line x1="128" y1="380" x2="408" y2="380" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f1-gn)" marker-start="url(#as-f1-gn)"/><text x="268" y="401.5" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text></svg></div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 1 — Poutre à section variable&nbsp;: vue de côté et vue de dessus.</figcaption>
+                        </figure>
+
+                        <dl class="grid grid-cols-1 gap-3 min-[430px]:grid-cols-2 sm:grid-cols-3">
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Effort nominal</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">\(F=270\,\mathrm{N}\)</dd>
+                            </div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Longueur</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">\(L=167{,}5\,\mathrm{mm}\)</dd>
+                            </div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Largeur</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">\(b=40\,\mathrm{mm}\)</dd>
+                            </div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Module d’Young (PLA)</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">\(E=2892\,\mathrm{MPa}\)</dd>
+                            </div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Limite élastique (PLA)</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">\(R_e=80\,\mathrm{MPa}\)</dd>
+                            </div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Flèche visée</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">\(\nu=23\,\mathrm{mm}\)</dd>
+                            </div>
+                        </dl>
+
+                        <p>Coefficient de sécurité&nbsp;: 4 \(\;\Rightarrow\;F=1080\,\mathrm{N}\).</p>
+
+                        <p class="border-l-4 border-amViolet-800 pl-4"><strong class="text-slate-900">Problématique&nbsp;:</strong> dimensionner cette poutre en résistance (\(\sigma_{\max}\le 80\,\mathrm{MPa}\)) et en rigidité (\(\nu=23\,\mathrm{mm}\)).</p>
+                    </article>
+
+                    <!-- ============ 2. Résistance ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">2</span>
+                            Résistance
+                        </h4>
+
+                        <p>On coupe la poutre à l’abscisse \(x\) et on note \(G_1\) le centre de la section de coupe.</p>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                            <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 160" role="img" aria-label="Coupe fictive de la poutre à l'abscisse x" class="mx-auto h-auto w-full max-w-lg"><defs><pattern id="hn-f2" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-f2" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-f2-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-f2-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-f2-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-f2-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-f2-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-f2-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-f2-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-f2-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-f2-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-f2-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-f2-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-f2-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><rect x="22" y="12" width="14" height="76" fill="url(#hn-f2)"/><line x1="36" y1="88" x2="36" y2="12" stroke="#0f172a" stroke-width="2.2"/><polygon points="36,80 316,80 316,64 36,20" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2" stroke-linejoin="round"/><line x1="176" y1="84" x2="176" y2="40" stroke="#7F2060" stroke-width="1.3" stroke-dasharray="6 5"/><circle cx="176" cy="66" r="3.4" fill="#7F2060"/><text x="181.6" y="60.7" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">G</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">1</tspan></text><line x1="36" y1="104" x2="176" y2="104" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f2-gn)" marker-start="url(#as-f2-gn)"/><text x="106" y="125.5" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><line x1="36" y1="132" x2="316" y2="132" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-f2-gn)" marker-start="url(#as-f2-gn)"/><text x="176" y="153.5" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text><line x1="332" y1="20" x2="316" y2="64" stroke="#7F2060" stroke-width="2.4" marker-end="url(#ae-f2-vn)"/><text x="336" y="41.5" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">F</tspan></text><text x="298" y="33.5" text-anchor="middle" font-size="18" fill="#7F2060"><tspan class="sv-r">20°</tspan></text></svg></div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 2 — Coupe fictive à l’abscisse \(x\).</figcaption>
+                        </figure>
+
+                        <p>Torseur de cohésion en \(G_1\)&nbsp;:</p>
+                        <div class="eq">
+                            $$\{\tau_{coh}\}_{G_1}=\left\{\begin{array}{c|c}
+                            -F\sin(20^\circ) &amp; 0\\
+                            -F\cos(20^\circ) &amp; 0\\
+                            0 &amp; -F\cos(20^\circ)\,(L-x)
+                            \end{array}\right\}_{G_1}$$
+                        </div>
+
+                        <p>Le moment fléchissant est donc \(M_{fz}(x)=-F\cos(20^\circ)\,(L-x)\), maximal en valeur absolue à l’encastrement&nbsp;: \(|M_{fz}|_{\max}=F\cos(20^\circ)\,L\).</p>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                            <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 188" role="img" aria-label="Diagramme du moment fléchissant le long de la poutre" class="mx-auto h-auto w-full max-w-lg"><defs><pattern id="hn-f3" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-f3" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-f3-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-f3-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-f3-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-f3-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-f3-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-f3-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-f3-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-f3-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-f3-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-f3-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-f3-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-f3-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><polygon points="156,72 156,152 436,72" fill="url(#hv-f3)"/><line x1="156" y1="176" x2="156" y2="32" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-f3-kn)"/><text x="156" y="23.1" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">M</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">fz</tspan></text><line x1="156" y1="72" x2="468" y2="72" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-f3-kn)"/><text x="474" y="78.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><line x1="156" y1="152" x2="436" y2="72" stroke="#7F2060" stroke-width="2.2"/><text x="150" y="66.3" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-r">0</tspan></text><text x="150" y="158.3" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-r">−</tspan><tspan class="sv-m">F</tspan><tspan class="sv-r"> cos(20°)</tspan><tspan class="sv-m"> L</tspan></text></svg></div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 3 — Diagramme du moment fléchissant.</figcaption>
+                        </figure>
+
+                        <p>Contrainte maximale (fibre extrême, à une distance \(h/2\) de la fibre neutre)&nbsp;:</p>
+                        <div class="eq">
+                            $$\begin{aligned}
+                            \sigma_{\max}=\frac{F\cos(20^\circ)\,L}{\dfrac{bh^3}{12}}\times\frac{h}{2}\le R_e
+                            &amp;\iff \frac{F\cos(20^\circ)\,L}{\dfrac{2bh^2}{12}}\le R_e\\
+                            &amp;\iff \frac{6\,F\cos(20^\circ)\,L}{bh^2}\le R_e\\
+                            &amp;\iff \sqrt{\frac{6\,F\cos(20^\circ)\,L}{b\,R_e}}\le h_0\\
+                            &amp;\iff \sqrt{\frac{6\times1080\times\cos(20^\circ)\times167{,}5}{40\times80}}\le h_0
+                            \end{aligned}$$
+                        </div>
+
+                        <div class="eq-key">
+                            $$h_0\ge 17{,}85\,\mathrm{mm}$$
+                        </div>
+                    </article>
+
+                    <!-- ============ 3. Rigidité ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">3</span>
+                            Rigidité
+                        </h4>
+
+                        <p>Soit \(h(x)=h_0-\dfrac{h_0-h_L}{L}\,x\) et \(\nu=23\,\mathrm{mm}\).</p>
+
+                        <div class="eq">
+                            $$\begin{aligned}
+                            E\,I_{Gz}\,\nu''=M_{fz}
+                            &amp;\iff E\,I_{Gz}\,\nu''=-F\cos(20^\circ)\,(L-x)\\
+                            &amp;\iff E\left[\frac{b}{12}\left(h_0-\frac{h_0-h_L}{L}\,x\right)^{3}\right]\nu''=-F\cos(20^\circ)\,(L-x)\\
+                            &amp;\iff \nu''=\frac{-F\cos(20^\circ)\,(L-x)}{E\,\dfrac{b}{12}\left(h_0-\dfrac{h_0-h_L}{L}\,x\right)^{3}}
+                            \end{aligned}$$
+                        </div>
+
+                        <p>L’expression est compliquée à intégrer pour trouver \(\nu\). En intégrant deux fois, l’IA trouve qu’avec \(h_0=18\) et \(h_L=2{,}86\), on obtient \(\nu=23\,\mathrm{mm}\).</p>
+                    </article>
+
+                    <!-- ============ 4. Essai : changement de géométrie ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">4</span>
+                            Essai&nbsp;: changement de géométrie
+                        </h4>
+
+                        <p><strong class="text-slate-900">Essai&nbsp;:</strong> changeons de géométrie, \(h(x)=\sqrt{x}\), c’est-à-dire que l’allure de la poutre suit une fonction racine.</p>
+
+                        <p>Définissons \(h(x)\) à partir de la condition \(\sigma_{\max}\le R_e\)&nbsp;:</p>
+                        <div class="eq">
+                            $$\begin{aligned}
+                            \frac{6\,F\cos(20^\circ)}{b\,h(x)^2}\,(L-x)\le 80
+                            &amp;\iff \frac{6\,F\cos(20^\circ)}{80\,b}\,(L-x)\le h(x)^2\\
+                            &amp;\iff \sqrt{\frac{6\,F\cos(20^\circ)}{80\,b}\,(L-x)}\le h(x)\\
+                            &amp;\Rightarrow \sqrt{\frac{6\,F\cos(20^\circ)}{80\,b}\times L\times\Bigl(1-\frac{x}{L}\Bigr)}\le h(x)
+                            \end{aligned}$$
+                        </div>
+
+                        <p>En \(x=0\)&nbsp;:</p>
+                        <div class="eq">
+                            $$\sqrt{\frac{6\,F\,L\cos(20^\circ)}{80\,b}}\le h_0
+                            \iff \frac{6\,F\,L\cos(20^\circ)}{80\,b}\le h_0^2 .$$
+                        </div>
+
+                        <p>On en déduit&nbsp;:</p>
+                        <div class="eq">
+                            $$\begin{aligned}
+                            \sqrt{h_0^2\Bigl(1-\frac{x}{L}\Bigr)}&amp;\le h(x)\\
+                            \sqrt{h_0^2-\frac{h_0^2}{L}\,x}&amp;\le h(x)\\
+                            \sqrt{324-1{,}93\,x}&amp;\le h(x)\qquad\text{(on sait que } h_0=18\text{)}
+                            \end{aligned}$$
+                        </div>
+                    </article>
+
+                    <!-- ============ 5. Flèche pour le profil en racine ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">5</span>
+                            Flèche pour le profil en racine
+                        </h4>
+
+                        <p>On injecte \(h(x)=h_0\sqrt{1-\dfrac{x}{L}}\) dans le moment quadratique&nbsp;:</p>
+                        <div class="eq">
+                            $$I_{Gz}(x)=\frac{b}{12}\left(h_0\sqrt{1-\frac{x}{L}}\right)^{3}
+                            =\frac{b\,h_0^3}{12}\left(1-\frac{x}{L}\right)^{3/2}.$$
+                        </div>
+
+                        <p>Le moment fléchissant s’écrit</p>
+                        <div class="eq">
+                            $$M_{fz}=-F\cos(20^\circ)\,(L-x)=-F\cos(20^\circ)\,L\left(1-\frac{x}{L}\right).$$
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">Dérivée seconde</h5>
+                        <div class="eq">
+                            $$\begin{aligned}
+                            \nu''(x)=\frac{M_{fz}(x)}{E\,I_{Gz}(x)}
+                            &amp;=\frac{-F\cos(20^\circ)\,L\left(1-\dfrac{x}{L}\right)}{E\,\dfrac{b\,h_0^3}{12}\left(1-\dfrac{x}{L}\right)^{3/2}}\\[1ex]
+                            &amp;=\frac{-12\,F\cos(20^\circ)\,L}{E\,b\,h_0^3}\times\frac{1}{\sqrt{1-\dfrac{x}{L}}}
+                            \end{aligned}$$
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">Première intégration</h5>
+                        <p>Primitive utile&nbsp;: \(\displaystyle\int\frac{\mathrm{d}x}{\sqrt{1-\frac{x}{L}}}=-2L\sqrt{1-\frac{x}{L}}\). Donc</p>
+                        <div class="eq">
+                            $$\nu'(x)=\frac{-12\,F\cos(20^\circ)\,L}{E\,b\,h_0^3}\left(-2L\sqrt{1-\frac{x}{L}}\right)+C_1
+                            =\frac{24\,F\cos(20^\circ)\,L^2}{E\,b\,h_0^3}\sqrt{1-\frac{x}{L}}+C_1 .$$
+                        </div>
+                        <p>Condition à l’encastrement&nbsp;: \(\nu'(0)=0\), d’où</p>
+                        <div class="eq">
+                            $$0=\frac{24\,F\cos(20^\circ)\,L^2}{E\,b\,h_0^3}\sqrt{1-0}+C_1
+                            \;\Rightarrow\;
+                            C_1=-\frac{24\,F\cos(20^\circ)\,L^2}{E\,b\,h_0^3}$$
+                            $$\Rightarrow\;
+                            \nu'(x)=\frac{24\,F\cos(20^\circ)\,L^2}{E\,b\,h_0^3}\left(\sqrt{1-\frac{x}{L}}-1\right).$$
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">Seconde intégration</h5>
+                        <p>Primitives utiles&nbsp;: \(\displaystyle\int\sqrt{1-\tfrac{x}{L}}\,\mathrm{d}x=-\tfrac{2}{3}L\left(1-\tfrac{x}{L}\right)^{3/2}\) et \(\displaystyle\int(-1)\,\mathrm{d}x=-x\). Donc</p>
+                        <div class="eq">
+                            $$\nu(x)=\frac{24\,F\cos(20^\circ)\,L^2}{E\,b\,h_0^3}\left[-\frac{2}{3}L\left(1-\frac{x}{L}\right)^{3/2}-x\right]+C_2 .$$
+                        </div>
+                        <p>Condition à l’encastrement&nbsp;: \(\nu(0)=0\;\Rightarrow\;C_2=\dfrac{16\,F\cos(20^\circ)\,L^3}{E\,b\,h_0^3}\), d’où</p>
+                        <div class="eq">
+                            $$\nu(x)=\frac{24\,F\cos(20^\circ)\,L^2}{E\,b\,h_0^3}\left[-\frac{2}{3}L\left(1-\frac{x}{L}\right)^{3/2}-x\right]+\frac{16\,F\cos(20^\circ)\,L^3}{E\,b\,h_0^3}.$$
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">Flèche en bout de poutre</h5>
+                        <p>En \(x=L\)&nbsp;:</p>
+                        <div class="eq">
+                            $$|\nu(L)|=\frac{8\,F\cos(20^\circ)\,L^3}{E\,b\,h_0^3}.$$
+                        </div>
+
+                        <div class="eq-key">
+                            <p class="text-slate-800"><strong class="text-slate-900">A.N.&nbsp;:</strong> \(\nu(L)=14{,}15\,\mathrm{mm}\neq 23\,\mathrm{mm}\) &emsp;\(\Rightarrow\)&emsp; <strong class="text-slate-900">pas acceptable</strong>.</p>
+                        </div>
+                    </article>
+
+                    <!-- ============ 6. Conclusion ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">6</span>
+                            Conclusion
+                        </h4>
+
+                        <p>L’étude analytique d’une poutre à section rectangulaire constante met en évidence l’absence de solution conciliant les critères de résistance mécanique et de rigidité&nbsp;:</p>
+                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Critère de résistance (contrainte)&nbsp;:</strong> pour garantir la sécurité sous charge extrême (1080&nbsp;N), une section minimale de \(b=40\,\mathrm{mm}\) et \(h=18\,\mathrm{mm}\) est requise. Cependant, cette poutre est trop rigide et ne fléchit pas assez.</li>
+                            <li><strong class="text-slate-900">Critère de rigidité (flèche)&nbsp;:</strong> pour obtenir exactement la souplesse ciblée de 23&nbsp;mm, il faut réduire la hauteur à \(h=12{,}15\,\mathrm{mm}\). Mais la contrainte sous charge extrême dépasse alors la limite élastique \(R_e=80\,\mathrm{MPa}\) du PLA.</li>
+                        </ul>
+
+                        <p>La tentative de concilier ces deux exigences par une poutre à section variable se heurte peut-être aux limites physiques de la RDM classique et de ses théories de base, ce qui expliquerait la difficulté à trouver une telle poutre&nbsp;:</p>
+                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Petits déplacements&nbsp;:</strong> la flèche de 23&nbsp;mm représente presque 14&nbsp;% de la longueur (167,5&nbsp;mm), ce qui pourrait invalider l’hypothèse de petits déplacements.</li>
+                        </ul>
+
+                        <p>La géométrie de poutre droite pleine ne permet pas de satisfaire le cahier des charges en RDM analytique. Pour débloquer la conception, les étapes suivantes sont préconisées&nbsp;:</p>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-bezier-curve" aria-hidden="true"></i></span>
+                                <p><strong class="text-slate-900">Évolution géométrique&nbsp;:</strong> abandonner la poutre droite pour une lame courbe en C ou en L.</p>
+                            </div>
+                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+                                <p><strong class="text-slate-900">Validation numérique (FEM)&nbsp;:</strong> réaliser une simulation par éléments finis 3D sous CAO.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
             </div>
         </div>
 
