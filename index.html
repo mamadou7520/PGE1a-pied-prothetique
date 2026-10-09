@@ -1353,7 +1353,7 @@
                 document.getElementById(`tab-btn-${name}`).className = name === tabName ? activeClass : inactiveClass;
                 document.getElementById(`view-${name}`).classList.toggle('hidden', name !== tabName);
             });
-            document.getElementById('methodology-btn').classList.toggle('hidden', tabName !== 'mapping');
+            document.getElementById('methodology-btn').classList.toggle('invisible', tabName !== 'mapping');
         }
 
         // ---------------------------------------------------------------
