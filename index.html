@@ -111,7 +111,7 @@
 
         <div class="flex items-center space-x-3">
             <!-- Bouton Méthodologie -->
-            <button onclick="openMethodologyModal()"
+            <button id="methodology-btn" onclick="openMethodologyModal()"
                 class="text-sm bg-amViolet-700 hover:bg-amViolet-900 text-white px-5 py-3 rounded-xl border border-amViolet-700 transition flex items-center space-x-3 shadow-md font-semibold">
                 <i class="fa-solid fa-circle-info text-amOrange text-base"></i>
                 <span>Méthodologie</span>
@@ -1353,6 +1353,7 @@
                 document.getElementById(`tab-btn-${name}`).className = name === tabName ? activeClass : inactiveClass;
                 document.getElementById(`view-${name}`).classList.toggle('hidden', name !== tabName);
             });
+            document.getElementById('methodology-btn').classList.toggle('hidden', tabName !== 'mapping');
         }
 
         // ---------------------------------------------------------------
