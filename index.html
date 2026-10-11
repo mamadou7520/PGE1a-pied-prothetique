@@ -107,6 +107,11 @@
                 <i class="fa-solid fa-flask"></i>
                 <span>Etude 2 : PLA</span>
             </button>
+            <button onclick="switchTab('cao')" id="tab-btn-cao"
+                class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
+                <i class="fa-solid fa-cubes"></i>
+                <span>CAO V0</span>
+            </button>
         </div>
 
         <div class="flex items-center space-x-3">
@@ -852,6 +857,93 @@
             </div>
         </div>
 
+        <!-- ================= VUE 5 : CAO V0 ================= -->
+        <div id="view-cao" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto px-6 py-8 md:px-10 w-full h-full">
+            <div class="max-w-6xl mx-auto w-full space-y-10">
+                <h2 class="text-3xl font-bold underline text-slate-900">Conception assistée par ordinateur (CAO)</h2>
+
+                <section aria-label="Vue ISO et logo 3DEXPERIENCE du concept CAO" class="space-y-6">
+                    <div class="flex justify-center">
+                        <div class="grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+                            <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                                <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                                    <img src="image/vue iso.png" alt="Vue ISO du pied prothétique CAO" class="h-full w-full object-contain">
+                                </div>
+                            </figure>
+                            <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                                <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                                    <img src="image/logo3dx.png" alt="Logo 3DEXPERIENCE" class="h-full w-full object-contain">
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+
+                <section aria-labelledby="cao-introduction" class="space-y-6 text-base leading-relaxed text-slate-700">
+                    <p id="cao-introduction">La CAO du pied prothétique a été réalisée avec CATIA 3DEXPERIENCE, dans l’atelier Part Design. Le modèle est construit à partir des résultats de RDM de l’étude 2 (modélisation en poutre en L) et des exigences du cahier des charges fonctionnel (CDCF), dont sont issues les dimensions principales.</p>
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                            <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                                <img src="image/esquisse paramétrée.png" alt="Esquisse paramétrée de la conception du pied prothétique" class="h-full w-full object-contain">
+                            </div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Esquisse paramétrée</figcaption>
+                        </figure>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                            <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                                <img src="image/Esquisse platine.png" alt="Esquisse de la platine du pied prothétique" class="h-full w-full object-contain">
+                            </div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Esquisse platine</figcaption>
+                        </figure>
+                    </div>
+
+                    <p>La conception est entièrement paramétrée. Chaque esquisse est contrainte par des cotes pilotées par des paramètres : la largeur (base), la hauteur H0 à la jonction des deux parties du pied, l’épaisseur HL en bout de pied, la longueur du bout du pied et la longueur totale du pied.</p>
+
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                            <img src="image/parametrage.png" alt="Paramétrage de la géométrie du pied prothétique" class="h-full w-full object-contain">
+                        </div>
+                    </figure>
+
+                    <p>Ce choix facilite les modifications et permet de vérifier la robustesse de la conception : une variation de paramètre met à jour le modèle sans casser les esquisses ni les congés.</p>
+
+                    <p>L’arbre de construction est rangé et ordonné logiquement, avec les différents éléments qui composent la pièce.</p>
+
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                            <img src="image/arbre de construction.png" alt="Arbre de construction de la pièce CAO" class="h-full w-full object-contain">
+                        </div>
+                    </figure>
+
+                    <p>Le PLA n’existant pas dans la bibliothèque de matériaux de CATIA, nous avons créé un matériau PLA dont les caractéristiques proviennent du CDCF et de la fiche technique Ultimaker. Ce matériau permet de mesurer dans CATIA une masse de la pièce de 224 g.</p>
+                </section>
+
+                <section aria-labelledby="dessin-definition" class="space-y-6">
+                    <h3 id="dessin-definition" class="text-2xl font-bold text-slate-900">Dessin de définition de la pièce</h3>
+
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div class="flex h-64 items-center justify-center bg-white p-4 sm:h-80">
+                            <img src="image/drawing.png" alt="Dessin de définition V0 du pied prothétique" class="h-full w-full object-contain">
+                        </div>
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Dessin de définition V0</figcaption>
+                    </figure>
+                </section>
+
+                <section aria-labelledby="specifications-dessin" class="space-y-6 text-base leading-relaxed text-slate-700">
+                    <h3 id="specifications-dessin" class="text-2xl font-bold text-slate-900">Spécifications du dessin de définition</h3>
+
+                    <p>Conformément à la démarche ISO GPS, ce sont les fonctions du pied qui pilotent la cotation : le pied repose sur le sol par sa plante et reçoit un adaptateur sur sa plaque de fixation par quatre vis M5. Les spécifications retenues traduisent ces deux fonctions.</p>
+
+                    <p><strong>Référence A : la plante.</strong> Elle est choisie comme référence primaire, car c’est la grande surface d’appui du pied et elle matérialise l’orientation par rapport au sol. Elle porte donc une tolérance de <strong>planéité de 0,3 mm</strong>, nécessaire pour qu’une référence soit fiable. Ce défaut est particulièrement à surveiller en impression FDM, car le PLA peut gauchir aux extrémités d’une lame fine.</p>
+
+                    <p><strong>Orientation par rapport à A.</strong> Une tolérance de <strong>perpendicularité de 0,5 mm</strong> du col par rapport à A garantit que la charge est transmise verticalement. Une tolérance de <strong>parallélisme de 0,5 mm</strong> de la face supérieure de la plaque par rapport à A garantit l’orientation de l’adaptateur par rapport au sol.</p>
+
+                    <p><strong>Position des quatre trous Ø5,5.</strong> Ils sont spécifiés par une tolérance de <strong>position de Ø0,3 mm par rapport à A, B et C</strong>. B est la face latérale de la plaque et C est son extrémité, ce qui positionne les trous par rapport aux bords de la plaque, avec A comme référence primaire. Le Ø5,5 correspond à un jeu moyen pour une vis M5, soit 0,5 mm de jeu à partager entre le pied et l’adaptateur. La tolérance Ø0,3 est un compromis réaliste pour une impression FDM. Les cotes de position (7,5 ; 30 ; 5 ; 30) sont encadrées : ce sont des cotes théoriquement exactes, et la tolérance de position est donc portée uniquement par le cadre de tolérance. Le diamètre est tolérancé H12, car l’impression verticale donne des trous plus petits que le modèle (principe d’indépendance, ISO 8015).</p>
+                </section>
+            </div>
+        </div>
+
     </div>
 
     <!-- Methodology Modal -->
@@ -1345,7 +1437,7 @@
 
         // Gestion de la navigation entre les onglets
         function switchTab(tabName) {
-            const tabNames = ['mapping', 'cdcf', 'etude1', 'etude2'];
+            const tabNames = ['mapping', 'cdcf', 'etude1', 'etude2', 'cao'];
             const activeClass = "px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm";
             const inactiveClass = "px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800";
 
