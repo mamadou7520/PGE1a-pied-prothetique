@@ -102,10 +102,15 @@
                 <i class="fa-solid fa-calculator"></i>
                 <span>Etude 1</span>
             </button>
+            <button onclick="switchTab('etudeL')" id="tab-btn-etudeL"
+                class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
+                <i class="fa-solid fa-bezier-curve"></i>
+                <span>Etude 2 : Poutre en L</span>
+            </button>
             <button onclick="switchTab('etude2')" id="tab-btn-etude2"
                 class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
                 <i class="fa-solid fa-flask"></i>
-                <span>Etude 2 : PLA</span>
+                <span>Etude 3 : PLA</span>
             </button>
             <button onclick="switchTab('cao')" id="tab-btn-cao"
                 class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
@@ -710,10 +715,384 @@
             </div>
         </div>
 
-        <!-- ================= VUE 4 : ETUDE 2 - PLA ================= -->
+        <!-- ================= VUE : ETUDE 2 - POUTRE EN L ================= -->
+        <div id="view-etudeL" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto px-10 pt-4 pb-10 w-full h-full">
+            <div class="max-w-6xl mx-auto w-full space-y-8">
+                <h2 class="text-3xl font-bold underline text-slate-900">Etude 2 hypothèse poutre en L</h2>
+
+                <div class="space-y-4 text-base leading-relaxed text-slate-700">
+                    <p>
+                        Cette deuxième étude reprend la démarche de l'étude 1 avec une géométrie plus proche de celle d'un
+                        pied réel : le pied est modélisé par un portique plan en L, composé d'une colonne verticale encastrée
+                        en haut et d'une semelle horizontale à section variable. Il n'y a pas de talon : la colonne se situe à
+                        l'arrière de la semelle, sans débord.
+                    </p>
+                    <p>
+                        L'étude 1 montrait qu'une poutre droite ne permet pas de concilier résistance et rigidité. Dans le
+                        pied en L, la flèche en bout de pied a deux origines : la flexion propre de la semelle et le
+                        basculement de la jonction, provoqué par la flexion de la colonne. Cette seconde contribution apporte
+                        la souplesse qui manquait à la poutre droite.
+                    </p>
+                    <p>
+                        Le calcul analytique conduit à une flèche de 23,26 mm, très proche de la valeur visée de 23 mm, et à
+                        une contrainte maximale de 67,55 MPa dans la colonne sous charge extrême, inférieure à la limite
+                        élastique de 80 MPa. La fin de l'étude discute la fiabilité de ces résultats et les écarts à attendre
+                        d'un calcul plus fin.
+                    </p>
+                </div>
+
+                <style>
+                    #rapport-poutre-L .sv-m { font-family: KaTeX_Math, "Times New Roman", serif; font-style: italic; }
+                    #rapport-poutre-L .sv-r { font-family: KaTeX_Main, "Times New Roman", serif; font-style: normal; }
+                    #rapport-poutre-L .katex { font-size: 1.08em; color: #1e293b; }
+                    #rapport-poutre-L .katex-display { margin: .55em 0; padding: .1rem 0; overflow-x: auto; overflow-y: hidden; }
+                    #rapport-poutre-L .eq { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: .6rem; background: #f8fafc; padding: .35rem .9rem; }
+                    #rapport-poutre-L dd .katex { white-space: nowrap; }
+                    #rapport-poutre-L .eq-key .katex { font-size: 1.22em; }
+                    #rapport-poutre-L .eq-key { border: 1px solid #fde4a8; border-left: 4px solid #F7A400; border-radius: .6rem; background: #fffbeb; padding: .5rem .9rem; }
+                </style>
+
+                <div id="rapport-poutre-L" class="space-y-6">
+
+                    <!-- ============ Bannière ============ -->
+                    <header class="overflow-hidden rounded-xl bg-amViolet-800 px-6 py-7 text-white shadow-sm sm:px-8">
+                        <div class="flex items-start gap-5">
+                            <div class="mt-1 h-14 w-2.5 shrink-0 bg-amOrange" style="transform: skewX(-20deg)"></div>
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-widest text-amber-200">Notes de calcul de poutre</p>
+                                <h3 class="mt-1 text-2xl font-bold leading-tight tracking-wide sm:text-3xl">Calcul de poutre en L pour pied prothétique</h3>
+                                <p class="mt-2 text-base text-slate-100">Pied en L sans talon, encastré en haut</p>
+                                <p class="mt-3 text-base font-medium text-white">Mamadou DIENE&nbsp;; Natan BERISSON</p>
+                                <p class="text-sm text-slate-200">PGE1A – Arts et Métiers</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- ============ 1. Données et problématique ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">1</span>
+                            Données et problématique
+                        </h4>
+
+                        <p>On modélise le pied par un portique plan en L composé de deux poutres liées rigidement à \(90^\circ\)&nbsp;: une <strong class="text-slate-900">colonne verticale</strong>, encastrée en haut, et une <strong class="text-slate-900">semelle horizontale</strong> à section variable. Sans talon, la colonne est située à l’arrière de la semelle, sans débord.</p>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="Pied en L sans talon, vue de côté et vue de dessus" class="mx-auto h-auto w-full max-w-2xl"><defs><pattern id="hn-L1" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-L1" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-L1-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-L1-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-L1-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-L1-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-L1-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-L1-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-L1-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-L1-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-L1-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-L1-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-L1-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-L1-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><text x="14" y="125" text-anchor="start" font-size="18" fill="#475569"><tspan class="sv-r">côté</tspan></text><rect x="110" y="10" width="100" height="20" fill="url(#hn-L1)"/><line x1="110" y1="30" x2="210" y2="30" stroke="#0f172a" stroke-width="2.2" /><polygon points="140,220 515.0,220 515.0,210.5 180,180 180,30 140,30" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2" stroke-linejoin="round"/><line x1="160" y1="292" x2="160" y2="22" stroke="#475569" stroke-width="1.3" stroke-dasharray="10 4 2 4"/><line x1="515.0" y1="196" x2="515.0" y2="300" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/><line x1="549.2" y1="314.0" x2="515.0" y2="220" stroke="#7F2060" stroke-width="2.4" marker-end="url(#ae-L1-vn)"/><text x="556.2" y="318.0" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">F</tspan></text><path d="M515.0,272 A52,52 0 0 0 532.8,268.9" fill="none" stroke="#7F2060" stroke-width="1.3"/><text x="508.0" y="266" text-anchor="end" font-size="18" fill="#7F2060"><tspan class="sv-r">20°</tspan></text><line x1="140" y1="220" x2="140" y2="252" stroke="#475569" stroke-width="1.3" /><line x1="180" y1="220" x2="180" y2="252" stroke="#475569" stroke-width="1.3" /><line x1="515.0" y1="220" x2="515.0" y2="252" stroke="#475569" stroke-width="1.3" /><line x1="140" y1="248" x2="180" y2="248" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gs)" marker-start="url(#as-L1-gs)"/><text x="132" y="269" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">h</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">0</tspan></text><line x1="180" y1="248" x2="515.0" y2="248" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gn)" marker-start="url(#as-L1-gn)"/><text x="347.5" y="269" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text><line x1="160" y1="288" x2="515.0" y2="288" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gn)" marker-start="url(#as-L1-gn)"/><text x="337.5" y="309" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">a</tspan><tspan class="sv-r"> = </tspan><tspan class="sv-m">L</tspan><tspan class="sv-r"> + </tspan><tspan class="sv-m">h</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">0</tspan><tspan class="sv-r" dy="-4.68">/2</tspan></text><line x1="140" y1="220" x2="92" y2="220" stroke="#475569" stroke-width="1.3" /><line x1="140" y1="30" x2="92" y2="30" stroke="#475569" stroke-width="1.3" /><line x1="100" y1="220" x2="100" y2="30" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gn)" marker-start="url(#as-L1-gn)"/><text x="92" y="130" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">H</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">v</tspan></text><line x1="196" y1="220" x2="196" y2="181.46" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gs)" marker-start="url(#as-L1-gs)"/><text x="206" y="209" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">h</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">0</tspan></text><line x1="515.0" y1="210.5" x2="540" y2="210.5" stroke="#475569" stroke-width="1.3" /><line x1="515.0" y1="220" x2="540" y2="220" stroke="#475569" stroke-width="1.3" /><line x1="534" y1="192" x2="534" y2="210.5" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gs)"/><line x1="534" y1="238" x2="534" y2="220" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gs)"/><text x="542" y="198" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">h</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">L</tspan></text><line x1="260" y1="120" x2="304" y2="120" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L1-kn)"/><text x="310" y="126.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><path d="M310,112.0 L320.8,112.0 M317.2,109.2 L320.8,112.0 L317.2,114.8" fill="none" stroke="#0f172a" stroke-width="1.1"/><line x1="260" y1="120" x2="260" y2="76" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L1-kn)"/><text x="252.8" y="103.0" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">y</tspan></text><path d="M243.2,88.7 L254.0,88.7 M250.4,85.9 L254.0,88.7 L250.4,91.5" fill="none" stroke="#0f172a" stroke-width="1.1"/><text x="14" y="385" text-anchor="start" font-size="18" fill="#475569"><tspan class="sv-r">dessus</tspan></text><rect x="140" y="340" width="375" height="80" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2"/><line x1="180" y1="340" x2="180" y2="420" stroke="#0f172a" stroke-width="1.3" /><text x="160" y="385" text-anchor="middle" font-size="12" fill="#475569"><tspan class="sv-r">col.</tspan></text><line x1="180" y1="420" x2="180" y2="446" stroke="#475569" stroke-width="1.3" /><line x1="515" y1="420" x2="515" y2="446" stroke="#475569" stroke-width="1.3" /><line x1="180" y1="442" x2="515" y2="442" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gn)" marker-start="url(#as-L1-gn)"/><text x="347.5" y="463" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text><line x1="515" y1="340" x2="542" y2="340" stroke="#475569" stroke-width="1.3" /><line x1="515" y1="420" x2="542" y2="420" stroke="#475569" stroke-width="1.3" /><line x1="536" y1="340" x2="536" y2="420" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L1-gn)" marker-start="url(#as-L1-gn)"/><text x="544" y="386" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">b</tspan></text></svg></div>
+        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 1 — Pied en L sans talon&nbsp;: vue de côté et vue de dessus.</figcaption>
+        </figure>
+
+                        <dl class="grid grid-cols-1 gap-3 min-[430px]:grid-cols-2 sm:grid-cols-3">
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Effort nominal</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(F=270\,\mathrm{N}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Longueur</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(L=167{,}5\,\mathrm{mm}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Largeur</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(b=40\,\mathrm{mm}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Module d’Young (PLA)</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(E=2892\,\mathrm{MPa}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Limite élastique (PLA)</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(R_e=80\,\mathrm{MPa}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Flèche visée</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(\nu=23\,\mathrm{mm}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Hauteur à la jonction</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(h_0=20\,\mathrm{mm}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Hauteur en bout</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(h_L=4{,}75\,\mathrm{mm}\)</dd></div>
+                            <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3"><dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Hauteur de colonne</dt><dd class="mt-1 text-lg font-semibold text-slate-900">\(H_v=95\,\mathrm{mm}\)</dd></div>
+                        </dl>
+
+                        <p>Coefficient de sécurité&nbsp;: 4 \(\;\Rightarrow\;F=1080\,\mathrm{N}\).</p>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">Hypothèses de modélisation</h5>
+                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
+                            <li>\(L=167{,}5\,\mathrm{mm}\) est la longueur libre de la semelle, mesurée depuis la face de la colonne&nbsp;;</li>
+                            <li>la colonne a une section constante \(b\times h_0=40\times 20\,\mathrm{mm}\)&nbsp;; son axe est à \(h_0/2=10\,\mathrm{mm}\) en arrière de la jonction, d’où le bras de levier
+                                <span class="block overflow-x-auto py-1">\[a=L+\frac{h_0}{2}=167{,}5+10=\mathbf{177{,}5\,\mathrm{mm}}\]</span></li>
+                            <li>la hauteur de la semelle varie linéairement&nbsp;: \(h(x)=h_0-\dfrac{h_0-h_L}{L}\,x=20-15{,}25\,\dfrac{x}{L}\)&nbsp;;</li>
+                            <li>la composante horizontale \(F\sin(20^\circ)\) est négligée dans le calcul des moments&nbsp;: son sens (vers la colonne) réduit le moment dans la colonne, sauf à la jonction où il est inchangé. La négliger va donc dans le sens de la sécurité pour la contrainte.</li>
+                        </ul>
+
+                        <p class="border-l-4 border-amViolet-800 pl-4"><strong class="text-slate-900">Problématique&nbsp;:</strong> dimensionner ce pied en résistance (\(\sigma_{\max}\le 80\,\mathrm{MPa}\)) et en rigidité (\(\nu=23\,\mathrm{mm}\)).</p>
+
+                        <p>Composantes de l’effort&nbsp;:</p>
+                        <div class="eq">
+                            $$F_y=270\cos(20^\circ)=\mathbf{253{,}72\,\mathrm{N}},\qquad F_{y,\mathrm{ext}}=1080\cos(20^\circ)=\mathbf{1014{,}87\,\mathrm{N}}.$$
+                        </div>
+                    </article>
+
+                    <!-- ============ 2. Résistance ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">2</span>
+                            Résistance
+                        </h4>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">2.1 Semelle&nbsp;: torseur de cohésion et moment fléchissant</h5>
+                        <p>On coupe la semelle à l’abscisse \(x\) et on note \(G_1\) le centre de la section de coupe. On isole le tronçon \([x,L]\).</p>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 290" role="img" aria-label="Coupe fictive de la semelle à l’abscisse x" class="mx-auto h-auto w-full max-w-xl"><defs><pattern id="hn-L2" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-L2" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-L2-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-L2-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-L2-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-L2-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-L2-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-L2-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-L2-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-L2-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-L2-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-L2-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-L2-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-L2-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><rect x="50.8" y="122.0" width="19.2" height="48.0" fill="url(#hn-L2)"/><line x1="70.0" y1="174.8" x2="70.0" y2="117.2" stroke="#0f172a" stroke-width="2.2" /><line x1="70.0" y1="170.0" x2="214.0" y2="170.0" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/><line x1="70.0" y1="122.0" x2="214.0" y2="135.1" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/><line x1="70.0" y1="170.0" x2="70.0" y2="122.0" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/><polygon points="214.0,170.0 472.0,170.0 472.0,158.6 214.0,135.1" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2" stroke-linejoin="round"/><line x1="214.0" y1="170.0" x2="214.0" y2="135.1" stroke="#7F2060" stroke-width="2.6" /><circle cx="214.0" cy="152.55" r="3.4" fill="#7F2060"/><text x="206.0" y="149.6" text-anchor="end" font-size="18" fill="#7F2060"><tspan class="sv-m">G</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">1</tspan></text><line x1="472.0" y1="141" x2="472.0" y2="262" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/><line x1="506.5" y1="264.7" x2="472.0" y2="170.0" stroke="#7F2060" stroke-width="2.4" marker-end="url(#ae-L2-vn)"/><text x="512.5" y="268.7" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">F</tspan></text><path d="M472.0,222.8 A52.8,52.8 0 0 0 490.1,219.6" fill="none" stroke="#7F2060" stroke-width="1.3"/><text x="466.0" y="236" text-anchor="end" font-size="18" fill="#7F2060"><tspan class="sv-r">20°</tspan></text><line x1="70.0" y1="170.0" x2="70.0" y2="248" stroke="#475569" stroke-width="1.3" /><line x1="214.0" y1="170.0" x2="214.0" y2="206" stroke="#475569" stroke-width="1.3" /><line x1="472.0" y1="170.0" x2="472.0" y2="248" stroke="#475569" stroke-width="1.3" /><line x1="70.0" y1="198.8" x2="214.0" y2="198.8" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L2-gn)" marker-start="url(#as-L2-gn)"/><text x="142.0" y="220" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><line x1="214.0" y1="198.8" x2="472.0" y2="198.8" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L2-gn)" marker-start="url(#as-L2-gn)"/><text x="343.0" y="220" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan><tspan class="sv-r">−</tspan><tspan class="sv-m">x</tspan></text><line x1="70.0" y1="242" x2="472.0" y2="242" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L2-gn)" marker-start="url(#as-L2-gn)"/><text x="271.0" y="263.5" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text><line x1="262.0" y1="74.0" x2="310.0" y2="74.0" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L2-kn)"/><text x="316.0" y="80.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><path d="M316.0,66.0 L326.8,66.0 M323.2,63.2 L326.8,66.0 L323.2,68.8" fill="none" stroke="#0f172a" stroke-width="1.1"/><line x1="262.0" y1="74.0" x2="262.0" y2="26.0" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L2-kn)"/><text x="254.8" y="55.0" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">y</tspan></text><path d="M245.2,40.7 L256.0,40.7 M252.4,37.9 L256.0,40.7 L252.4,43.5" fill="none" stroke="#0f172a" stroke-width="1.1"/></svg></div>
+        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 2 — Coupe fictive de la semelle à l’abscisse \(x\).</figcaption>
+        </figure>
+
+                        <p>Torseur de cohésion en \(G_1\)&nbsp;:</p>
+                        <div class="eq">
+                            $$\{\tau_{coh}\}_{G_1}=\left\{\begin{array}{c|c}
+                            -F\sin(20^\circ) &amp; 0\\
+                            -F\cos(20^\circ) &amp; 0\\
+                            0 &amp; -F\cos(20^\circ)\,(L-x)
+                            \end{array}\right\}_{G_1}$$
+                        </div>
+                        <p class="text-sm italic text-slate-600">Les signes dépendent de la convention d’axes&nbsp;; seules les valeurs absolues interviennent dans le dimensionnement.</p>
+
+                        <p>Le moment fléchissant est donc \(M_{fz}(x)=-F\cos(20^\circ)\,(L-x)\), maximal en valeur absolue à la jonction (\(x=0\))&nbsp;: \(|M_{fz}|_{\max}=F\cos(20^\circ)\,L\).</p>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 188" role="img" aria-label="Diagramme du moment fléchissant dans la semelle" class="mx-auto h-auto w-full max-w-xl"><defs><pattern id="hn-L3" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-L3" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-L3-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-L3-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-L3-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-L3-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-L3-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-L3-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-L3-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-L3-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-L3-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-L3-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-L3-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-L3-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><polygon points="156,72 156,152 436,72" fill="url(#hv-L3)"/><line x1="156" y1="176" x2="156" y2="32" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L3-kn)"/><text x="156" y="23.1" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">M</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">fz</tspan></text><line x1="156" y1="72" x2="468" y2="72" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L3-kn)"/><text x="474" y="78.3" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">x</tspan></text><line x1="156" y1="152" x2="436" y2="72" stroke="#7F2060" stroke-width="2.2" /><text x="150" y="66.3" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-r">0</tspan></text><text x="436" y="60" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">L</tspan></text><text x="168" y="176" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-r">−</tspan><tspan class="sv-m">F</tspan><tspan class="sv-r"> cos(20°)</tspan><tspan class="sv-m"> L</tspan></text></svg></div>
+        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 3 — Diagramme du moment fléchissant dans la semelle.</figcaption>
+        </figure>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">2.2 Colonne&nbsp;: moment fléchissant constant</h5>
+                        <p>La semelle transmet à la colonne le moment \(F_y\cdot a\). Pour une coupe à la hauteur \(y\) de la colonne, le torseur de cohésion s’écrit (en négligeant l’effet de \(F\sin(20^\circ)\) sur le moment)&nbsp;:</p>
+                        <div class="eq">
+                            $$\{\tau_{coh}\}_{G_2}=\left\{\begin{array}{c|c}
+                            -F\sin(20^\circ) &amp; 0\\
+                            -F\cos(20^\circ) &amp; 0\\
+                            0 &amp; -F\cos(20^\circ)\,\Bigl(L+\dfrac{h_0}{2}\Bigr)
+                            \end{array}\right\}_{G_2}$$
+                        </div>
+
+                        <p>Le moment est donc <strong class="text-slate-900">constant</strong> sur toute la hauteur \(H_v\) de la colonne&nbsp;:</p>
+                        <div class="eq">
+                            $$M_{col}=F\cos(20^\circ)\,a=F_y\cdot\Bigl(L+\frac{h_0}{2}\Bigr).$$
+                        </div>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" role="img" aria-label="Colonne et diagramme du moment fléchissant constant" class="mx-auto h-auto w-full max-w-xl"><defs><pattern id="hn-L4" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-L4" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-L4-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-L4-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-L4-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-L4-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-L4-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-L4-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-L4-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-L4-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-L4-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-L4-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-L4-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-L4-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><rect x="80" y="22" width="96" height="18" fill="url(#hn-L4)"/><line x1="80" y1="40" x2="176" y2="40" stroke="#0f172a" stroke-width="2.2" /><rect x="100" y="40" width="56" height="260" fill="#f7edf3" stroke="#0f172a" stroke-width="2.2"/><line x1="100" y1="300" x2="42" y2="300" stroke="#475569" stroke-width="1.3" /><line x1="100" y1="40" x2="42" y2="40" stroke="#475569" stroke-width="1.3" /><line x1="50" y1="300" x2="50" y2="40" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L4-gn)" marker-start="url(#as-L4-gn)"/><text x="42" y="176" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">H</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">v</tspan></text><rect x="230" y="40" width="170" height="260" fill="url(#hv-L4)"/><path d="M230,300 L400,300 L400,40 L230,40" fill="none" stroke="#7F2060" stroke-width="2.2" stroke-linejoin="round"/><line x1="230" y1="312" x2="230" y2="30" stroke="#0f172a" stroke-width="1.3" marker-end="url(#ae-L4-kn)"/><text x="230" y="20" text-anchor="middle" font-size="18" fill="#0f172a"><tspan class="sv-m">M</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">fz</tspan></text><text x="222" y="176" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-r">0</tspan></text><text x="408" y="176" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-r">−</tspan><tspan class="sv-m">F</tspan><tspan class="sv-r"> cos(20°)</tspan><tspan class="sv-m"> a</tspan></text></svg></div>
+        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 4 — Colonne et diagramme du moment fléchissant (constant).</figcaption>
+        </figure>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">2.3 Contrainte maximale</h5>
+                        <p>La contrainte maximale s’exerce sur la fibre extrême, à la distance \(h_0/2\) de la fibre neutre (formule de Navier)&nbsp;:</p>
+                        <div class="eq">
+                            $$\sigma_{\max}=\frac{M}{\dfrac{b\,h_0^3}{12}}\times\frac{h_0}{2}=\frac{6\,M}{b\,h_0^2},\qquad b\,h_0^2=40\times 20^2=16\,000\,\mathrm{mm}^3 .$$
+                        </div>
+
+                        <p>Moments en jeu&nbsp;: \(M_{sem}=F_y\,L\) et \(M_{col}=F_y\,a\).</p>
+
+                        <div class="overflow-x-auto rounded-lg border border-slate-200">
+                            <table class="min-w-full border-collapse text-left text-sm">
+                                <thead class="bg-amViolet-900 text-white">
+                                    <tr><th scope="col" class="px-4 py-3 font-semibold">Grandeur</th><th scope="col" class="px-4 py-3 font-semibold">Nominal (\(270\,\mathrm{N}\))</th><th scope="col" class="px-4 py-3 font-semibold">Extrême (\(1080\,\mathrm{N}\))</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white">
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(F_y\)</th><td class="px-4 py-3">\(253{,}72\,\mathrm{N}\)</td><td class="px-4 py-3">\(1014{,}87\,\mathrm{N}\)</td></tr>
+                                    <tr class="bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(M_{sem}=F_y\,L\)</th><td class="px-4 py-3">\(42\,498\,\mathrm{N\cdot mm}\)</td><td class="px-4 py-3">\(169\,991\,\mathrm{N\cdot mm}\)</td></tr>
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(M_{col}=F_y\,a\)</th><td class="px-4 py-3">\(45\,035\,\mathrm{N\cdot mm}\)</td><td class="px-4 py-3">\(180\,139\,\mathrm{N\cdot mm}\)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p><strong class="text-slate-900">Semelle (jonction)&nbsp;:</strong></p>
+                        <div class="eq">
+                            $$\sigma_{sem,270}=\frac{6\times 42\,498{,}1}{16\,000}=\mathbf{15{,}94\,\mathrm{MPa}},\qquad
+                            \sigma_{sem,1080}=\frac{6\times 169\,990{,}7}{16\,000}=\mathbf{63{,}75\,\mathrm{MPa}}.$$
+                        </div>
+
+                        <p><strong class="text-slate-900">Colonne&nbsp;:</strong></p>
+                        <div class="eq">
+                            $$\sigma_{col,270}=\frac{6\times 45\,034{,}8}{16\,000}=\mathbf{16{,}89\,\mathrm{MPa}},\qquad
+                            \sigma_{col,1080}=\frac{6\times 180\,139{,}4}{16\,000}=\mathbf{67{,}55\,\mathrm{MPa}}.$$
+                        </div>
+
+                        <div class="eq-key">
+                            <p class="text-slate-800">La <strong class="text-slate-900">colonne est la section critique</strong>, car son bras de levier est plus grand de \(h_0/2=10\,\mathrm{mm}\)&nbsp;: \(67{,}55\,\mathrm{MPa}&lt;R_e=80\,\mathrm{MPa}\), soit une marge d’environ 16&nbsp;% sous charge extrême.</p>
+                        </div>
+
+                        <p><strong class="text-slate-900">Effort normal dans la colonne&nbsp;:</strong> la force \(F_y\) est aussi axiale dans la colonne&nbsp;:</p>
+                        <div class="eq">
+                            $$\sigma_N=\frac{F_{y,\mathrm{ext}}}{b\,h_0}=\frac{1014{,}87}{800}=\mathbf{1{,}27\,\mathrm{MPa}}.$$
+                        </div>
+                        <p>Dans le cas le plus défavorable, la fibre la plus sollicitée atteint \(67{,}55+1{,}27=68{,}82\,\mathrm{MPa}\), ce qui reste négligeable devant la flexion.</p>
+                    </article>
+
+                    <!-- ============ 3. Rigidité ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">3</span>
+                            Rigidité
+                        </h4>
+
+                        <p>La flèche en bout de pied s’obtient par superposition de deux effets&nbsp;: la flexion propre de la semelle (\(v_1\)) et le basculement de la jonction provoqué par la flexion de la colonne (\(v_2\)).</p>
+
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div class="p-2 sm:p-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 260" role="img" aria-label="Déformée du pied, flèche v1 de la semelle et v2 due à la colonne" class="mx-auto h-auto w-full max-w-2xl"><defs><pattern id="hn-L5" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M-1,8 L8,-1 M-1,1 L1,-1 M6,8 L8,6" stroke="#64748b" stroke-width="1" fill="none"/></pattern><pattern id="hv-L5" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M3,0 L3,6" stroke="#7F2060" stroke-width="1.1" fill="none" opacity=".55"/></pattern><marker id="ae-L5-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#0f172a"/></marker><marker id="as-L5-kn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#0f172a"/></marker><marker id="ae-L5-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#0f172a"/></marker><marker id="as-L5-ks" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#0f172a"/></marker><marker id="ae-L5-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#475569"/></marker><marker id="as-L5-gn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#475569"/></marker><marker id="ae-L5-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#475569"/></marker><marker id="as-L5-gs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#475569"/></marker><marker id="ae-L5-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0,0 L10,4.5 L0,9 L2.97,4.5 Z" fill="#7F2060"/></marker><marker id="as-L5-vn" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="1" refY="4.5" orient="auto"><path d="M11,0 L1,4.5 L11,9 L8.03,4.5 Z" fill="#7F2060"/></marker><marker id="ae-L5-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="7" refY="3.25" orient="auto"><path d="M0,0 L7,3.25 L0,6.5 L2.16,3.25 Z" fill="#7F2060"/></marker><marker id="as-L5-vs" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="6.5" refX="1" refY="3.25" orient="auto"><path d="M8,0 L1,3.25 L8,6.5 L5.84,3.25 Z" fill="#7F2060"/></marker></defs><rect x="60" y="10" width="60" height="18" fill="url(#hn-L5)"/><line x1="60" y1="28" x2="120" y2="28" stroke="#0f172a" stroke-width="2.2" /><line x1="90" y1="218" x2="90" y2="28" stroke="#475569" stroke-width="1.5" stroke-dasharray="6 5"/><line x1="90" y1="218" x2="445" y2="218" stroke="#475569" stroke-width="1.5" stroke-dasharray="6 5"/><line x1="108" y1="218" x2="457.6" y2="156.4" stroke="#475569" stroke-width="1.6" stroke-dasharray="2 5" stroke-linecap="round"/><path d="M108,218 C99.4,168.8 90,98 90,28" fill="none" stroke="#7F2060" stroke-width="2.6"/><path d="M108,218 C226.2,197.2 363.6,146.6 457.6,112.4" fill="none" stroke="#7F2060" stroke-width="2.6"/><circle cx="108" cy="218" r="3.2" fill="#7F2060"/><line x1="482" y1="178" x2="457.6" y2="112.4" stroke="#7F2060" stroke-width="2.4" marker-end="url(#ae-L5-vn)"/><text x="490" y="184" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">F</tspan></text><path d="M188,218 A80,80 0 0 0 186.8,204.1" fill="none" stroke="#7F2060" stroke-width="1.3"/><text x="205" y="238" text-anchor="start" font-size="18" fill="#7F2060"><tspan class="sv-m">θ</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">0</tspan></text><line x1="457.6" y1="218" x2="514" y2="218" stroke="#475569" stroke-width="1.3" /><line x1="457.6" y1="156.4" x2="514" y2="156.4" stroke="#475569" stroke-width="1.3" /><line x1="457.6" y1="112.4" x2="514" y2="112.4" stroke="#475569" stroke-width="1.3" /><line x1="506" y1="218" x2="506" y2="156.4" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L5-gn)" marker-start="url(#as-L5-gn)"/><text x="514" y="191" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">v</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">2</tspan></text><line x1="506" y1="156.4" x2="506" y2="112.4" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L5-gs)" marker-start="url(#as-L5-gs)"/><text x="514" y="138" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">v</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">1</tspan></text><line x1="514" y1="218" x2="554" y2="218" stroke="#475569" stroke-width="1.3" /><line x1="514" y1="112.4" x2="554" y2="112.4" stroke="#475569" stroke-width="1.3" /><line x1="546" y1="218" x2="546" y2="112.4" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L5-gn)" marker-start="url(#as-L5-gn)"/><text x="554" y="170" text-anchor="start" font-size="18" fill="#0f172a"><tspan class="sv-m">v</tspan><tspan class="sv-r" font-size="12.96" dy="4.68">tot</tspan></text><line x1="90" y1="218" x2="42" y2="218" stroke="#475569" stroke-width="1.3" /><line x1="90" y1="28" x2="42" y2="28" stroke="#475569" stroke-width="1.3" /><line x1="50" y1="218" x2="50" y2="28" stroke="#475569" stroke-width="1.3" marker-end="url(#ae-L5-gn)" marker-start="url(#as-L5-gn)"/><text x="42" y="128" text-anchor="end" font-size="18" fill="#0f172a"><tspan class="sv-m">H</tspan><tspan class="sv-m" font-size="12.96" dy="4.68">v</tspan></text></svg></div>
+        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Figure 5 — Déformée du pied (amplifiée, hors échelle)&nbsp;: en pointillés, la rotation rigide \(\theta_0\) de la semelle (flèche \(v_2\)); en trait plein, la flexion propre de la semelle (flèche \(v_1\) en plus).</figcaption>
+        </figure>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">3.1 Flèche propre de la semelle (\(v_1\))</h5>
+                        <p>Avec \(h(x)=h_0-\dfrac{h_0-h_L}{L}\,x\) et \(I_{Gz}(x)=\dfrac{b\,h(x)^3}{12}\), l’équation de la courbure s’écrit&nbsp;:</p>
+                        <div class="eq">
+                            $$E\,I_{Gz}\,v_1''=M_{fz}\iff v_1''(x)=\frac{-12\,F_y\,(L-x)}{E\,b\,\left[h_0-\dfrac{h_0-h_L}{L}\,x\right]^{3}} .$$
+                        </div>
+
+                        <p>Deux intégrations successives, avec les conditions à la jonction \(v_1(0)=0\) et \(v_1'(0)=0\), donnent la flèche en bout de semelle&nbsp;:</p>
+                        <div class="eq">
+                            $$v_1=\frac{6\,F_y\,L^3}{E\,b\,h_0^2\,(h_0-h_L)^3}\left[2h_0^2\ln\!\Bigl(\frac{h_0}{h_L}\Bigr)-3h_0^2+4h_0h_L-h_L^2\right].$$
+                        </div>
+
+                        <p><strong class="text-slate-900">Application numérique&nbsp;:</strong></p>
+                        <div class="eq">
+                            $$\frac{6\times 253{,}72\times 167{,}5^3}{2892\times 40\times 20^2\times (20-4{,}75)^3}=\frac{7\,153\,930\,000}{164\,107\,300\,000}\approx 0{,}04359\,\mathrm{mm}^{-1}$$
+                            $$\begin{aligned}
+                            \text{Crochet}&amp;=2(20)^2\times\ln(4{,}2105)-3(20)^2+4(20)(4{,}75)-(4{,}75)^2\\
+                            &amp;=1150{,}07-1200+380-22{,}56=307{,}51\,\mathrm{mm}^2
+                            \end{aligned}$$
+                        </div>
+                        <div class="eq-key">
+                            $$v_1=0{,}04359\times 307{,}51=\mathbf{13{,}41\,\mathrm{mm}}$$
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">3.2 Flèche induite par la colonne (\(v_2\))</h5>
+                        <p>Sous le moment constant \(M_{col}\), la colonne de section constante (\(I_v=\dfrac{b\,h_0^3}{12}=26\,666{,}7\,\mathrm{mm}^4\)) vérifie \(\theta'(y)=\dfrac{M_{col}}{E\,I_v}\). En intégrant sur \(H_v\) avec la condition de blocage en haut \(\theta(H_v)=0\), la rotation de la jonction vaut&nbsp;:</p>
+                        <div class="eq">
+                            $$\theta_0=\frac{M_{col}\,H_v}{E\,I_v}=\frac{45\,034{,}8\times 95}{2892\times 26\,666{,}7}=\mathbf{0{,}05548\,\mathrm{rad}}\;(\approx 3{,}18^\circ).$$
+                        </div>
+
+                        <p>En petits déplacements, le bout de la semelle, situé à la distance \(a\) de l’axe de la colonne, se déplace verticalement de&nbsp;:</p>
+                        <div class="eq-key">
+                            $$v_2=a\,\theta_0=\frac{F_y\,a^2\,H_v}{E\,I_v}=177{,}5\times 0{,}05548=\mathbf{9{,}85\,\mathrm{mm}}$$
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">3.3 Flèche totale (superposition)</h5>
+                        <p>La RDM étant linéaire (petits déplacements, matériau élastique linéaire), les deux effets s’ajoutent&nbsp;:</p>
+                        <div class="eq-key">
+                            $$v_{tot}=v_1+v_2=13{,}41+9{,}85=\mathbf{23{,}26\,\mathrm{mm}}$$
+                            <p class="text-slate-800">Flèche visée \(\nu=23\,\mathrm{mm}\)&nbsp;: écart de \(+0{,}26\,\mathrm{mm}\), soit environ 1&nbsp;%.</p>
+                        </div>
+                    </article>
+
+                    <!-- ============ 4. Tableau récapitulatif ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">4</span>
+                            Tableau récapitulatif
+                        </h4>
+
+                        <div class="overflow-x-auto rounded-lg border border-slate-200">
+                            <table class="min-w-full border-collapse text-left text-sm">
+                                <caption class="bg-slate-50 px-4 py-3 text-left font-semibold text-slate-800">Récapitulatif des résultats du calcul de poutre en L</caption>
+                                <thead class="bg-amViolet-900 text-white">
+                                    <tr><th scope="col" class="px-4 py-3 font-semibold">Grandeur</th><th scope="col" class="px-4 py-3 font-semibold">Nominal (\(270\,\mathrm{N}\))</th><th scope="col" class="px-4 py-3 font-semibold">Extrême (\(1080\,\mathrm{N}\))</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white">
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(F_y=F\cos(20^\circ)\)</th><td class="px-4 py-3">\(253{,}72\,\mathrm{N}\)</td><td class="px-4 py-3">\(1014{,}87\,\mathrm{N}\)</td></tr>
+                                    <tr class="bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(M_{sem}=F_y\,L\)</th><td class="px-4 py-3">\(42\,498\,\mathrm{N\cdot mm}\)</td><td class="px-4 py-3">\(169\,991\,\mathrm{N\cdot mm}\)</td></tr>
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(M_{col}=F_y\,a\)</th><td class="px-4 py-3">\(45\,035\,\mathrm{N\cdot mm}\)</td><td class="px-4 py-3">\(180\,139\,\mathrm{N\cdot mm}\)</td></tr>
+                                    <tr class="bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(\sigma_{sem}\) (semelle)</th><td class="px-4 py-3">\(15{,}94\,\mathrm{MPa}\)</td><td class="px-4 py-3">\(63{,}75\,\mathrm{MPa}\)</td></tr>
+                                    <tr class="bg-amber-50"><th scope="row" class="px-4 py-3 font-semibold text-slate-900">\(\sigma_{col}\) (colonne, critique)</th><td class="px-4 py-3">\(16{,}89\,\mathrm{MPa}\)</td><td class="px-4 py-3 font-bold text-slate-900">\(67{,}55\,\mathrm{MPa}\)</td></tr>
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(\sigma_N\) (effort normal)</th><td class="px-4 py-3">\(0{,}32\,\mathrm{MPa}\)</td><td class="px-4 py-3">\(1{,}27\,\mathrm{MPa}\)</td></tr>
+                                    <tr class="bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(\sigma_{col}+\sigma_N\) (pire cas)</th><td class="px-4 py-3">\(17{,}21\,\mathrm{MPa}\)</td><td class="px-4 py-3">\(68{,}82\,\mathrm{MPa}\)</td></tr>
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(R_e\)</th><td class="px-4 py-3">\(80\,\mathrm{MPa}\)</td><td class="px-4 py-3">\(80\,\mathrm{MPa}\)</td></tr>
+                                    <tr class="bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(v_1\) (semelle)</th><td colspan="2" class="px-4 py-3 text-center">\(13{,}41\,\mathrm{mm}\)</td></tr>
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(\theta_0\) (jonction)</th><td colspan="2" class="px-4 py-3 text-center">\(0{,}05548\,\mathrm{rad}\;(3{,}18^\circ)\)</td></tr>
+                                    <tr class="bg-slate-50"><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(v_2=a\,\theta_0\) (colonne)</th><td colspan="2" class="px-4 py-3 text-center">\(9{,}85\,\mathrm{mm}\)</td></tr>
+                                    <tr class="bg-amber-50"><th scope="row" class="px-4 py-3 font-semibold text-slate-900">\(v_{tot}=v_1+v_2\)</th><td colspan="2" class="px-4 py-3 text-center font-bold text-slate-900">\(23{,}26\,\mathrm{mm}\) (cible \(23\,\mathrm{mm}\))</td></tr>
+                                    <tr><th scope="row" class="px-4 py-3 font-medium text-slate-800">\(K_t\) maximal admissible (\(R_e/\sigma_{col}\))</th><td colspan="2" class="px-4 py-3 text-center">\(\approx 1{,}18\)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <!-- ============ 5. Fiabilité des résultats et limites du modèle ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">5</span>
+                            Fiabilité des résultats et limites du modèle
+                        </h4>
+
+                        <p>Le calcul de RDM est un modèle de poutres&nbsp;: il donne des ordres de grandeur fiables sur le comportement global du pied, mais il ne décrit pas les effets locaux. Les deux critères du cahier des charges ne sont pas concernés de la même façon.</p>
+
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                                <p><strong class="text-slate-900">Rigidité&nbsp;: résultat fiable.</strong> La flèche de 23,26&nbsp;mm est cohérente avec la cible (écart d’environ 1&nbsp;%). Elle repose sur un comportement global, bien décrit par la théorie des poutres.</p>
+                            </div>
+                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amOrange text-slate-950"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span>
+                                <p><strong class="text-slate-900">Résistance&nbsp;: fiable en contrainte nominale, pas en contrainte maximale locale.</strong> Les 67,55&nbsp;MPa sont la contrainte de flexion de la section courante, pas la contrainte de pic au coin du L.</p>
+                            </div>
+                        </div>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">5.1 Flèche&nbsp;: ce qui peut la faire varier</h5>
+                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Composante horizontale négligée.</strong> Elle réduit le moment dans la colonne (sans effet à la jonction), donc la rotation \(\theta_0\). L’ordre de grandeur de ce terme est d’environ 1&nbsp;mm de flèche en moins, soit une flèche proche de 22,3&nbsp;mm.</li>
+                            <li><strong class="text-slate-900">Matériau.</strong> Le module \(E=2892\,\mathrm{MPa}\) est une valeur de fiche technique. La dispersion mesurée entre éprouvettes est de l’ordre de 4&nbsp;%, et la flèche y est directement proportionnelle. Le modèle suppose aussi une section pleine&nbsp;: un pied imprimé avec un remplissage creux sera plus souple (voir l’onglet PLA).</li>
+                            <li><strong class="text-slate-900">Effort tranchant.</strong> Il est négligé (théorie d’Euler-Bernoulli). L’élancement de la colonne (\(H_v/h_0\approx 4{,}75\)) est modéré&nbsp;: l’effet reste de quelques pourcents.</li>
+                        </ul>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">5.2 Contrainte&nbsp;: nominale contre contrainte locale</h5>
+                        <p>La formule de Navier suppose une poutre droite à section lentement variable. Au coin intérieur du L, où la semelle rejoint la colonne, cette hypothèse n’est plus valable&nbsp;: la géométrie change brutalement et le flux de contraintes se concentre. La contrainte réelle y est la contrainte nominale multipliée par un coefficient de concentration \(K_t>1\), qui dépend essentiellement du rayon de congé.</p>
+                        <div class="eq-key">
+                            $$\sigma_{local}=K_t\times\sigma_{RDM}\le R_e\iff K_t\le\frac{80}{67{,}55}\approx 1{,}18$$
+                        </div>
+                        <p>La marge de 16&nbsp;% disparaît donc dès que \(K_t\) dépasse 1,18, valeur que l’on dépasse facilement pour un angle rentrant. Un calcul local est donc nécessaire pour valider la résistance. Le choix de \(R_e\) compte aussi&nbsp;: 80&nbsp;MPa est la valeur de la fiche technique, alors que la limite élastique conventionnelle mesurée en flexion sur éprouvettes XY (onglet PLA) est d’environ 69&nbsp;MPa, très proche des 67,55&nbsp;MPa calculés.</p>
+
+                        <h5 class="pt-2 text-sm font-semibold uppercase tracking-wide text-amViolet-800">5.3 Écarts à prévoir avec un calcul par éléments finis</h5>
+                        <p>Un calcul 3D par éléments finis ne remettrait pas en cause le calcul de RDM&nbsp;: il décrirait ce que la RDM ne voit pas. On peut s’attendre à&nbsp;:</p>
+                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Une contrainte maximale supérieure à la RDM</strong>, localisée au congé du coin intérieur. L’écart est important sur cette grandeur, car on compare une contrainte nominale à un pic local (valeur dépendant du rayon de congé et, pour un angle vif, du maillage).</li>
+                            <li><strong class="text-slate-900">Une flèche proche de la RDM</strong> (écart de quelques pourcents), car la flèche est une grandeur globale peu sensible aux effets locaux.</li>
+                            <li><strong class="text-slate-900">Des effets géométriques non linéaires.</strong> La flèche de 23&nbsp;mm représente environ 14&nbsp;% de la longueur&nbsp;: l’hypothèse de petits déplacements est discutable. Sous charge extrême, le pied se déforme beaucoup, le point d’application de l’effort se déplace par rapport à la colonne et le bras de levier \(a\) change de quelques pourcents, ce qui modifie légèrement le moment et la contrainte.</li>
+                            <li><strong class="text-slate-900">Une jonction déformable.</strong> La RDM suppose le nœud semelle-colonne parfaitement rigide, alors qu’en réalité cette zone se déforme (cisaillement, effets de bord), ce qui augmente légèrement la souplesse et peut modifier la répartition des efforts.</li>
+                            <li><strong class="text-slate-900">Le comportement du PLA imprimé.</strong> Il est anisotrope et creux, alors que le modèle le suppose isotrope et plein.</li>
+                        </ul>
+                    </article>
+
+                    <!-- ============ 6. Conclusion ============ -->
+                    <article class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-700 shadow-sm sm:p-7">
+                        <h4 class="flex items-center gap-3 text-xl font-semibold text-slate-900">
+                            <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amViolet-800 text-sm font-bold text-white">6</span>
+                            Conclusion
+                        </h4>
+
+                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Rigidité&nbsp;:</strong> la flèche théorique de \(23{,}26\,\mathrm{mm}\) correspond à la flèche visée de \(23\,\mathrm{mm}\) (écart d’environ 1&nbsp;%). Elle se décompose en \(13{,}41\,\mathrm{mm}\) pour la semelle et \(9{,}85\,\mathrm{mm}\) pour le basculement de la colonne. Contrairement à la poutre droite de l’étude 1, la géométrie en L permet d’atteindre la souplesse visée.</li>
+                            <li><strong class="text-slate-900">Résistance&nbsp;:</strong> la section critique est la colonne, avec \(67{,}55\,\mathrm{MPa}\) sous charge extrême, soit une marge d’environ 16&nbsp;% sur \(R_e=80\,\mathrm{MPa}\) en RDM. Cette marge est faible et ne tient pas compte des concentrations de contraintes.</li>
+                            <li><strong class="text-slate-900">Fiabilité&nbsp;:</strong> oui pour la flèche et pour la contrainte nominale&nbsp;; non pour la contrainte maximale locale. Un calcul par éléments finis donnera très probablement une contrainte de pic supérieure à la RDM, sans que cela invalide le calcul analytique.</li>
+                            <li><strong class="text-slate-900">Limites du modèle&nbsp;:</strong> composante horizontale de l’effort négligée, hauteur de colonne \(H_v=95\,\mathrm{mm}\) reprise du calcul avec talon, section pleine isotrope, et flèche représentant environ 14&nbsp;% de la longueur.</li>
+                        </ul>
+
+                        <p>Pour valider le dimensionnement, les étapes suivantes sont préconisées&nbsp;:</p>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-bezier-curve" aria-hidden="true"></i></span>
+                                <p><strong class="text-slate-900">Congé intérieur&nbsp;:</strong> augmenter le rayon de congé au coin du L, premier levier pour réduire \(K_t\) avant de modifier la section.</p>
+                            </div>
+                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+                                <p><strong class="text-slate-900">Validation numérique (FEM)&nbsp;:</strong> simulation par éléments finis 3D sous CAO, avec contrainte de Von Mises au congé.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var el = document.getElementById('rapport-poutre-L');
+                    if (el && window.renderMathInElement) {
+                        renderMathInElement(el, {
+                            delimiters: [
+                                { left: '$$', right: '$$', display: true },
+                                { left: '\\[', right: '\\]', display: true },
+                                { left: '\\(', right: '\\)', display: false }
+                            ],
+                            throwOnError: false
+                        });
+                    }
+                });
+            </script>
+        </div>
+
+        <!-- ================= VUE 4 : ETUDE 3 - PLA ================= -->
         <div id="view-etude2" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto px-6 py-8 md:px-10 w-full h-full">
             <div class="max-w-6xl mx-auto w-full space-y-10">
-                <h2 class="text-3xl font-bold underline text-slate-900">Etude 2 : PLA</h2>
+                <h2 class="text-3xl font-bold underline text-slate-900">Etude 3 : PLA</h2>
 
                 <section aria-label="Imprimante Ultimaker et fiche technique du PLA" class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
@@ -1439,7 +1818,7 @@
 
         // Gestion de la navigation entre les onglets
         function switchTab(tabName) {
-            const tabNames = ['mapping', 'cdcf', 'etude1', 'etude2', 'cao'];
+            const tabNames = ['mapping', 'cdcf', 'etude1', 'etudeL', 'etude2', 'cao'];
             const activeClass = "px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center space-x-2 bg-amOrange text-slate-950 shadow-sm";
             const inactiveClass = "px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800";
 
