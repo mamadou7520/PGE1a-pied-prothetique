@@ -110,7 +110,7 @@
             <button onclick="switchTab('etude2')" id="tab-btn-etude2"
                 class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
                 <i class="fa-solid fa-flask"></i>
-                <span>Etude 3 : PLA</span>
+                <span>Etude 3 : Matériau</span>
             </button>
             <button onclick="switchTab('cao')" id="tab-btn-cao"
                 class="px-5 py-2.5 rounded-xl font-medium text-sm transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-amViolet-800">
@@ -1092,7 +1092,7 @@
         <!-- ================= VUE 4 : ETUDE 3 - PLA ================= -->
         <div id="view-etude2" class="hidden flex-1 flex flex-col bg-slate-50 overflow-y-auto px-6 py-8 md:px-10 w-full h-full">
             <div class="max-w-6xl mx-auto w-full space-y-10">
-                <h2 class="text-3xl font-bold underline text-slate-900">Etude 3 : PLA</h2>
+                <h2 class="text-3xl font-bold underline text-slate-900">Etude 3 : Matériau</h2>
 
                 <section aria-label="Imprimante Ultimaker et fiche technique du PLA" class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
@@ -1232,6 +1232,39 @@
                         <p class="text-sm">A. Louessard, <i>Conception et prototypage de pied prothétique obtenu par fabrication additive</i>, thèse HESAM Université / Arts et Métiers, 2023 (HAL tel-04439541) : équation I-15 et annexe A (module de flexion équivalent), chapitre III (choix des matériaux, tableau III-12, modélisation du remplissage, essais de fatigue).</p>
                         <p class="text-sm">Fiche technique Ultimaker PLA : propriétés mécaniques (ISO 178). Norme ISO 178 : détermination des propriétés en flexion.</p>
                     </article>
+                </section>
+
+                <section aria-labelledby="pourquoi-pla" class="space-y-6 text-base leading-relaxed text-slate-700">
+                    <h3 id="pourquoi-pla" class="text-2xl font-bold text-slate-900">Pourquoi le PLA&nbsp;?</h3>
+                    <p>Pour vérifier si le PLA est le matériau le plus adapté à notre projet, nous avons réalisé une présélection dans le logiciel CES EduPack. Plusieurs filtres, définis sous forme de limites mécaniques et générales, ont été appliqués afin d’isoler les matériaux et les procédés de mise en forme les plus pertinents au regard de notre cahier des charges.</p>
+
+                    <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div class="flex min-h-72 items-center justify-center bg-white p-3 sm:min-h-[28rem] sm:p-6">
+                            <img src="image/R%C3%A9sistance%20en%20traction%20compressionMasse.png" alt="Sélection CES EduPack selon la résistance en traction et la masse volumique, avec une limite de résistance minimale de 69 MPa" class="max-h-[34rem] w-full object-contain">
+                        </div>
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Présélection des matériaux — Résistance en traction en fonction de la masse volumique, avec R<sub>m</sub> ≥ 69 MPa</figcaption>
+                    </figure>
+
+                    <p>Nous avons ensuite affiné la sélection en ajoutant deux limites&nbsp;: un module d’Young compris entre 2 et 8&nbsp;GPa et un prix inférieur à 340&nbsp;€/kg. Enfin, nous avons comparé les matériaux à l’aide d’un indice de performance associant le module d’Young et la limite de fatigue à la masse volumique&nbsp;: l’objectif est de favoriser les matériaux offrant de bonnes performances mécaniques pour une masse et un coût réduits.</p>
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                            <div class="flex min-h-72 items-center justify-center bg-white p-3 sm:min-h-[26rem] sm:p-5">
+                                <img src="image/indice%20de%20performance%20en%20fonction%20du%20prix.png" alt="Indice de performance mécanique en fonction du prix des matériaux sélectionnés dans CES EduPack" class="max-h-[30rem] w-full object-contain">
+                            </div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Indice de performance mécanique en fonction du prix</figcaption>
+                        </figure>
+                        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                            <div class="flex min-h-72 items-center justify-center bg-white p-3 sm:min-h-[26rem] sm:p-5">
+                                <img src="image/nom%20des%20materiaux.png" alt="Noms des matériaux correspondant aux résultats de la sélection CES EduPack" class="max-h-[30rem] w-full object-contain">
+                            </div>
+                            <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Matériaux identifiés par la sélection</figcaption>
+                        </figure>
+                    </div>
+
+                    <p>Ces filtres font ressortir plusieurs matériaux, principalement des polymères thermoplastiques. Les procédés envisageables comprennent notamment le moulage par injection, l’extrusion et la fabrication additive. Parmi les candidats identifiés, le PLA, le polyamide (PA, ou nylon) et le polyéthylène téréphtalate (PET) se distinguent.</p>
+                    <p>Notre projet étant consacré au <strong>prototypage</strong>, la cadence de production est faible. La fabrication additive est donc le procédé le plus adapté. Le PET apparaît comme une option économique dans les résultats d’EduPack, tandis que le PLA constitue également un candidat pertinent. Pour notre cahier des charges, le PLA présente un avantage par rapport au PA&nbsp;: il offre une bonne résistance aux UV et une résistance à l’eau acceptable.</p>
+                    <p>Enfin, le classement tarifaire d’EduPack doit être interprété avec prudence, car le prix dépend du grade, du fournisseur et de la forme commerciale considérés. En pratique, les bobines de filament PA peuvent coûter jusqu’à deux fois plus cher que celles en PLA. Le PLA constitue ainsi un compromis cohérent entre propriétés d’usage, aptitude à l’impression 3D et coût réel d’approvisionnement.</p>
                 </section>
             </div>
         </div>
