@@ -469,8 +469,7 @@
                         mettent en évidence un compromis entre les critères de résistance et de rigidité.
                     </p>
                     <p>
-                        Lorsque la section est dimensionnée pour respecter le critère de contrainte, la rigidité obtenue
-                        reste insuffisante, avec une flèche calculée de 23 mm. À l'inverse, lorsque le dimensionnement
+                        Lorsque la section est dimensionnée pour respecter le critère de contrainte, la poutre obtenue est trop rigide&nbsp;: sa flèche est d'environ 7 mm, contre les 23 mm visés. À l'inverse, lorsque le dimensionnement
                         vise à respecter le critère de rigidité, les contraintes dépassent la limite admissible. Dans le
                         cadre de ces hypothèses, une section rectangulaire constante ne permet donc pas de satisfaire
                         simultanément les exigences de résistance et de rigidité.
@@ -619,6 +618,18 @@
                         </div>
 
                         <p>L’expression étant complexe à intégrer analytiquement, une résolution numérique permet de déterminer les dimensions donnant une flèche de \(\nu=23\,\mathrm{mm}\)&nbsp;: \(h_0=18\,\mathrm{mm}\) et \(h_L=2{,}86\,\mathrm{mm}\).</p>
+
+                        <p>Ce résultat ne garantit que la rigidité&nbsp;: la contrainte n’a été contrôlée qu’à l’encastrement. Or, lorsque la section s’amincit, le moment \(M_{fz}(x)\) diminue, mais \(h(x)\) diminue aussi, et la contrainte varie en \((L-x)/h(x)^2\)&nbsp;: elle n’est donc pas forcément maximale à l’encastrement. Vérifions-le sous charge extrême, avec \(k=\dfrac{h_0-h_L}{L}=0{,}0904\)&nbsp;:</p>
+                        <div class="eq">
+                            $$\sigma(x)=\frac{6\,F\cos(20^\circ)\,(L-x)}{b\,h(x)^2},\qquad
+                            \sigma'(x)=0\iff h(x)=2k\,(L-x)\iff x^*=2L-\frac{h_0}{k}=135{,}9\,\mathrm{mm}$$
+                            $$h(x^*)=18-0{,}0904\times135{,}9=5{,}72\,\mathrm{mm}$$
+                            $$\sigma(0)=\frac{6\times1014{,}87\times167{,}5}{40\times18^2}\approx 78{,}7\,\mathrm{MPa}\qquad\text{et}\qquad
+                            \sigma(x^*)=\frac{6\times1014{,}87\times31{,}64}{40\times5{,}72^2}\approx 147\,\mathrm{MPa}$$
+                        </div>
+                        <div class="eq-key">
+                            <p class="text-slate-800">La contrainte maximale vaut \(\approx 147\,\mathrm{MPa}>R_e=80\,\mathrm{MPa}\) et se situe à \(x\approx136\,\mathrm{mm}\), non à l’encastrement&nbsp;: <strong class="text-slate-900">cette poutre n’est pas acceptable</strong>.</p>
+                        </div>
                     </article>
 
                     <!-- ============ 4. Essai : changement de géométrie ============ -->
@@ -726,28 +737,13 @@
                             Conclusion
                         </h4>
 
-                        <p>L’étude analytique d’une poutre à section rectangulaire constante met en évidence l’absence de solution conciliant les critères de résistance mécanique et de rigidité&nbsp;:</p>
-                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
-                            <li><strong class="text-slate-900">Critère de résistance (contrainte)&nbsp;:</strong> pour garantir la sécurité sous charge extrême (1080&nbsp;N), une section minimale de \(b=40\,\mathrm{mm}\) et \(h=18\,\mathrm{mm}\) est requise. Cependant, cette poutre est trop rigide et ne fléchit pas assez.</li>
-                            <li><strong class="text-slate-900">Critère de rigidité (flèche)&nbsp;:</strong> pour obtenir exactement la souplesse ciblée de 23&nbsp;mm, il faut réduire la hauteur à \(h=12{,}15\,\mathrm{mm}\). Mais la contrainte sous charge extrême dépasse alors la limite élastique \(R_e=80\,\mathrm{MPa}\) du PLA.</li>
-                        </ul>
+                        <p class="text-sm italic text-slate-600">Rappel&nbsp;: la flèche est évaluée sous la charge nominale (270&nbsp;N) et la contrainte sous la charge extrême (1080&nbsp;N, coefficient de sécurité 4).</p>
 
-                        <p>La tentative de concilier ces deux exigences par une poutre à section variable se heurte peut-être aux limites physiques de la RDM classique et de ses théories de base, ce qui expliquerait la difficulté à trouver une telle poutre&nbsp;:</p>
-                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
-                            <li><strong class="text-slate-900">Petits déplacements&nbsp;:</strong> la flèche de 23&nbsp;mm représente presque 14&nbsp;% de la longueur (167,5&nbsp;mm), ce qui pourrait invalider l’hypothèse de petits déplacements.</li>
-                        </ul>
-
-                        <p>La géométrie de poutre droite pleine ne permet pas de satisfaire le cahier des charges en RDM analytique. Pour débloquer la conception, les étapes suivantes sont préconisées&nbsp;:</p>
-                        <div class="grid gap-4 sm:grid-cols-2">
-                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-bezier-curve" aria-hidden="true"></i></span>
-                                <p><strong class="text-slate-900">Évolution géométrique&nbsp;:</strong> abandonner la poutre droite pour une lame courbe en C ou en L.</p>
-                            </div>
-                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
-                                <p><strong class="text-slate-900">Validation numérique (FEM)&nbsp;:</strong> réaliser une simulation par éléments finis 3D sous CAO.</p>
-                            </div>
-                        </div>
+                        <ol class="list-decimal space-y-4 pl-6 marker:font-bold marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Poutre à section constante&nbsp;: aucune solution.</strong> Respecter la résistance impose \(h\ge 17{,}85\,\mathrm{mm}\), d’où une flèche d’environ 7&nbsp;mm seulement (trop rigide). Viser 23&nbsp;mm impose \(h=12{,}15\,\mathrm{mm}\), mais la contrainte atteint alors environ 173&nbsp;MPa, plus du double de \(R_e=80\,\mathrm{MPa}\).</li>
+                            <li><strong class="text-slate-900">Poutre à section variable&nbsp;: aucune solution non plus.</strong> Le rétrécissement linéaire (\(h_0=18\,\mathrm{mm}\), \(h_L=2{,}86\,\mathrm{mm}\)) donne bien 23&nbsp;mm, mais la contrainte atteint environ 147&nbsp;MPa à \(x\approx136\,\mathrm{mm}\), et non à l’encastrement. Le profil en racine, le plus fin autorisé par la résistance en tout point donc le plus souple possible, ne donne que 14,15&nbsp;mm. <strong class="text-slate-900">Aucune poutre de largeur 40&nbsp;mm à hauteur variable ne satisfait les deux critères.</strong></li>
+                            <li><strong class="text-slate-900">Il faut changer de géométrie.</strong> L’écart (14,15 contre 23&nbsp;mm) est trop grand pour s’expliquer par l’hypothèse de petits déplacements (23&nbsp;mm ≈ 14&nbsp;% de \(L\))&nbsp;: c’est la poutre droite qui est en cause. Suite&nbsp;: lame en L (étude 2), puis validation par éléments finis 3D.</li>
+                        </ol>
                     </article>
 
                 </div>
