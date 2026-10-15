@@ -1113,10 +1113,11 @@
                     <h3 id="introduction-pla" class="text-2xl font-bold text-slate-900">Introduction</h3>
                     <p>Les propriétés du PLA ont été déterminées et comparées aux données de la fiche technique du fabricant lors d’un TP de flexion en trois points. L’interprétation des résultats et certaines hypothèses s’appuient sur les travaux d’A. Louessard, <i>Conception et prototypage de pied prothétique obtenu par fabrication additive</i>, thèse HESAM Université / Arts et Métiers, 2023.</p>
                     <p>Dans le projet, la lame du pied prothétique travaille en flexion : lors de la marche, elle se comporte comme une poutre encastrée côté jambe et chargée à son extrémité. La raideur du pied et la restitution d’énergie dépendent donc de sa raideur en flexion. Or, en flexion, la contrainte normale est nulle sur la fibre neutre et maximale sur les fibres extrêmes : la matière située au cœur de la section travaille très peu.</p>
-                    <p>On ne met donc pas de matière sur la ligne neutre (figure 1 ci-dessous) : la pièce est imprimée avec des parois et un remplissage faible (modèle <span class="whitespace-nowrap">« creux »</span>). Sa raideur est peu pénalisée puisque le moment quadratique <i>I</i> dépend surtout de la matière éloignée de l’axe neutre. Mais une pièce imprimée est anisotrope (sens d’impression, adhésion entre couches) et son comportement dépend du remplissage et des parois.</p>
+                    <p>On ne met donc pas de matière sur la ligne neutre : la pièce est imprimée avec des parois et un remplissage faible (modèle <span class="whitespace-nowrap">« creux »</span>). Sa raideur est peu pénalisée puisque le moment quadratique <i>I</i> dépend surtout de la matière éloignée de l’axe neutre. Mais une pièce imprimée est anisotrope (sens d’impression, adhésion entre couches) et son comportement dépend du remplissage et des parois.</p>
 
                     <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                        <img src="image/figure%201%20vue%20en%20coupe%20d%27un%20pied%20proth%C3%A9tique.png" alt="Vue en coupe d'un pied prothétique imprimé avec une structure creuse et des parois périphériques" class="max-h-[34rem] w-full bg-white object-contain p-3">
+                        <img src="image/flexion%203%20points.png" alt="Machine Instron utilisée pour l'essai de flexion trois points" class="max-h-[34rem] w-full bg-white object-contain p-3">
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Montage expérimental — Essai de flexion 3 points</figcaption>
                     </figure>
 
                     <p>L’objectif du TP était de caractériser le comportement mécanique d’une poutre en régime de flexion simple. Pour cela, il fallait :</p>
@@ -1127,8 +1128,8 @@
                     </ol>
 
                     <figure class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                        <img src="image/flexion%203%20points.png" alt="Machine Instron utilisée pour l'essai de flexion trois points" class="max-h-[36rem] w-full bg-white object-contain p-3">
-                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Montage expérimental — Essai de flexion 3 points</figcaption>
+                        <img src="image/piedcura.png" alt="Pied prothétique Cura" class="max-h-[36rem] w-full bg-white object-contain p-3">
+                        <figcaption class="border-t border-slate-100 px-4 py-3 text-center text-sm font-medium text-slate-600">Pied Cura</figcaption>
                     </figure>
                 </section>
 
@@ -1358,6 +1359,27 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Introduction Modal -->
+    <div id="intro-modal"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        role="dialog" aria-modal="true" aria-labelledby="intro-modal-title">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-5xl w-full p-5 sm:p-7 shadow-2xl relative text-slate-800 max-h-[90vh] flex flex-col">
+            <button onclick="closeIntroModal()" aria-label="Fermer la mise en contexte"
+                class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h2 id="intro-modal-title" class="mb-4 pr-10 text-xl font-bold text-slate-900">Mise en contexte du projet</h2>
+            <img src="image/introcontexte.PNG" alt="Mise en contexte du projet de pied prothétique"
+                class="mx-auto max-h-[60vh] w-full rounded-xl bg-white object-contain">
+            <div class="mt-4 text-right">
+                <button onclick="closeIntroModal()"
+                    class="px-6 py-2.5 bg-amOrange hover:bg-amOrangeDark text-slate-950 font-bold rounded-xl text-sm transition shadow-sm">
+                    Continuer vers le site
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Methodology Modal -->
@@ -2033,6 +2055,7 @@
             alert("Lien du brevet copié dans le presse-papier !");
         }
 
+        function closeIntroModal() { document.getElementById('intro-modal').classList.add('hidden'); }
         function openMethodologyModal() { document.getElementById('methodology-modal').classList.remove('hidden'); }
         function closeMethodologyModal() { document.getElementById('methodology-modal').classList.add('hidden'); }
         function openPatentListModal() { document.getElementById('patent-list-modal').classList.remove('hidden'); }
