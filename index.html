@@ -1084,24 +1084,13 @@
                             Conclusion
                         </h4>
 
-                        <ul class="list-disc space-y-2 pl-6 marker:text-amViolet-800">
-                            <li><strong class="text-slate-900">Rigidité&nbsp;:</strong> la flèche théorique de \(23{,}26\,\mathrm{mm}\) correspond à la flèche visée de \(23\,\mathrm{mm}\) (écart d’environ 1&nbsp;%). Elle se décompose en \(13{,}41\,\mathrm{mm}\) pour la semelle et \(9{,}85\,\mathrm{mm}\) pour le basculement de la colonne. Contrairement à la poutre droite de l’étude 1, la géométrie en L permet d’atteindre la souplesse visée.</li>
-                            <li><strong class="text-slate-900">Résistance&nbsp;:</strong> la section critique est la colonne, avec \(67{,}55\,\mathrm{MPa}\) sous charge extrême, soit une marge d’environ 16&nbsp;% sur \(R_e=80\,\mathrm{MPa}\) en RDM. Cette marge est faible et ne tient pas compte des concentrations de contraintes.</li>
-                            <li><strong class="text-slate-900">Fiabilité&nbsp;:</strong> oui pour la flèche et pour la contrainte nominale&nbsp;; non pour la contrainte maximale locale. Un calcul par éléments finis donnera très probablement une contrainte de pic supérieure à la RDM, sans que cela invalide le calcul analytique.</li>
-                            <li><strong class="text-slate-900">Limites du modèle&nbsp;:</strong> composante horizontale de l’effort négligée, hauteur de colonne \(H_v=95\,\mathrm{mm}\) reprise du calcul avec talon, section pleine isotrope, et flèche représentant environ 14&nbsp;% de la longueur.</li>
-                        </ul>
+                        <p class="text-sm italic text-slate-600">Rappel&nbsp;: la flèche est évaluée sous la charge nominale (270&nbsp;N) et la contrainte sous la charge extrême (1080&nbsp;N, coefficient de sécurité 4).</p>
 
-                        <p>Pour valider le dimensionnement, les étapes suivantes sont préconisées&nbsp;:</p>
-                        <div class="grid gap-4 sm:grid-cols-2">
-                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-bezier-curve" aria-hidden="true"></i></span>
-                                <p><strong class="text-slate-900">Congé intérieur&nbsp;:</strong> augmenter le rayon de congé au coin du L, premier levier pour réduire \(K_t\) avant de modifier la section.</p>
-                            </div>
-                            <div class="flex gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amViolet-800 text-white"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
-                                <p><strong class="text-slate-900">Validation numérique (FEM)&nbsp;:</strong> simulation par éléments finis 3D sous CAO, avec contrainte de Von Mises au congé.</p>
-                            </div>
-                        </div>
+                        <ol class="list-decimal space-y-4 pl-6 marker:font-bold marker:text-amViolet-800">
+                            <li><strong class="text-slate-900">Rigidité&nbsp;: objectif atteint.</strong> La flèche théorique est de \(23{,}26\,\mathrm{mm}\) pour \(23\,\mathrm{mm}\) visés (écart d’environ 1&nbsp;%). Elle se décompose en \(13{,}41\,\mathrm{mm}\) de flexion de la semelle et \(9{,}85\,\mathrm{mm}\) de basculement de la colonne. C’est ce basculement qui apporte la souplesse que la poutre droite de l’étude 1 ne pouvait pas donner.</li>
+                            <li><strong class="text-slate-900">Résistance&nbsp;: la colonne est la section critique, avec une marge faible.</strong> Sous charge extrême, la contrainte y est de \(67{,}55\,\mathrm{MPa}\) pour \(R_e=80\,\mathrm{MPa}\), soit environ 16&nbsp;% de marge, contre \(63{,}75\,\mathrm{MPa}\) dans la semelle. Cette marge disparaît dès que le coefficient de concentration de contrainte dépasse \(K_t\approx1{,}18\), valeur que l’on dépasse facilement dans un angle rentrant.</li>
+                            <li><strong class="text-slate-900">Fiabilité et suite&nbsp;: flèche fiable, contrainte à valider au coin du L.</strong> La flèche et la contrainte nominale sont fiables, mais pas le pic de contrainte local, que la RDM ne voit pas. Les limites du modèle sont la composante horizontale négligée, la section pleine isotrope et la colonne de \(H_v=95\,\mathrm{mm}\) reprise du calcul avec talon. Suite&nbsp;: <strong class="text-slate-900">augmenter le rayon de congé</strong> au coin du L, puis <strong class="text-slate-900">valider par éléments finis 3D</strong> (contrainte de Von Mises au congé).</li>
+                        </ol>
                     </article>
 
                 </div>
